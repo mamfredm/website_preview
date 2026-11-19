@@ -57,6 +57,7 @@
   --mut:#8890A0;         /* secondary text */
   --blue:#3568FF;        /* brand accent — "Blue" */
   --blue-dim:#1E3B8A;
+  --blue-text:#6A92FF;   /* Blau für Schrift: mind. 4,5:1 auf dunklem Grund */
   --steel:#B9BDC6;       /* chrome / razor counterpoint */
   --line:rgba(237,239,243,.12);
 
@@ -82,7 +83,10 @@ body{
 
 .wrap{width:min(1120px,92vw);margin:0 auto}
 a{color:inherit;text-decoration:none}
-:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:3px}
+:focus-visible{outline:2px solid var(--blue-text);outline-offset:3px;border-radius:3px}
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.skip{position:absolute;left:12px;top:-60px;z-index:100;background:var(--blue);color:#fff;padding:10px 16px;border-radius:4px;font-weight:600}
+.skip:focus{top:12px}
 
 /* signature element: thin diagonal "barber stripe" rule, used as a divider — not a literal pole */
 .stripe{
@@ -92,14 +96,14 @@ a{color:inherit;text-decoration:none}
 
 .eyebrow{
   font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--blue);font-weight:500;margin-bottom:16px;
+  color:var(--blue-text);font-weight:500;margin-bottom:16px;
   display:flex;align-items:center;gap:12px;
 }
 .eyebrow::after{content:"";flex:1;height:1px;background:var(--line);max-width:80px}
 
 h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.02;letter-spacing:.005em;text-transform:uppercase}
 h2{font-size:clamp(30px,4.2vw,48px);margin-bottom:16px}
-h2 em{font-style:normal;color:var(--blue)}
+h2 em{font-style:normal;color:var(--blue-text)}
 
 section{padding:96px 0}
 @media(max-width:640px){section{padding:64px 0}}
@@ -110,16 +114,17 @@ nav.stuck{border-bottom-color:var(--line);padding:12px 0}
 nav.stuck::before{content:"";position:absolute;inset:0;z-index:-1;background:rgba(10,13,18,.92);backdrop-filter:blur(14px)}
 .nav-in{display:flex;align-items:center;justify-content:space-between;gap:20px}
 .brand{font-family:var(--display);font-size:20px;letter-spacing:.02em;white-space:nowrap;text-transform:uppercase}
-.brand span{color:var(--blue)}
+.brand span{color:var(--blue-text)}
 .nav-links{display:flex;align-items:center;gap:30px;font-size:14px}
 .nav-links a{color:var(--mut);transition:color .2s}
 .nav-links a:hover{color:var(--ink)}
+.nav-links a.btn-blue,.nav-links a.btn-blue:hover{color:#fff}
 
 .btn{display:inline-block;padding:13px 26px;border-radius:4px;font-family:var(--body);font-size:14.5px;font-weight:600;letter-spacing:.02em;cursor:pointer;border:1px solid transparent;transition:all .2s}
 .btn-blue{background:var(--blue);color:#fff}
-.btn-blue:hover{background:#4C79FF;transform:translateY(-1px)}
+.btn-blue:hover{background:#2B5BEB;transform:translateY(-1px)}
 .btn-ghost{border-color:var(--line);color:var(--ink)}
-.btn-ghost:hover{border-color:var(--blue);color:var(--blue)}
+.btn-ghost:hover{border-color:var(--blue-text);color:var(--blue-text)}
 .burger{display:none;background:none;border:0;color:var(--ink);font-size:24px;cursor:pointer;padding:4px 8px}
 
 /* ══ HERO ══ */
@@ -140,24 +145,25 @@ h1 .cut{color:var(--blue)}
 .stat-row{display:flex;gap:34px;flex-wrap:wrap}
 .stat b{display:block;font-family:var(--display);font-size:32px;color:var(--ink)}
 .stat span{color:var(--mut);font-size:13px;text-transform:uppercase;letter-spacing:.06em}
+.stat b span{color:inherit;font-size:inherit;text-transform:none;letter-spacing:0}
 
 .hero-card{background:var(--bg-lift);border:1px solid var(--line);border-radius:10px;padding:26px;font-family:var(--mono)}
 .hero-card .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;font-size:13px;color:var(--mut)}
 .hero-card .rating{color:var(--ink);font-size:15px;font-weight:600}
-.hero-card .rating b{color:var(--blue)}
+.hero-card .rating b{color:var(--blue-text)}
 .hero-card ul{list-style:none;display:flex;flex-direction:column;gap:11px}
 .hero-card li{display:flex;justify-content:space-between;font-size:14px;border-bottom:1px dashed var(--line);padding-bottom:11px}
 .hero-card li:last-child{border-bottom:none;padding-bottom:0}
-.hero-card li b{color:var(--blue);font-weight:600}
+.hero-card li b{color:var(--blue-text);font-weight:600}
 
 /* ══ SERVICES — menu board ══ */
 .svc-list{display:flex;flex-direction:column}
-.svc-row{display:flex;align-items:center;gap:20px;padding:22px 4px;border-bottom:1px solid var(--line);cursor:pointer;transition:background .15s}
+.svc-row{display:flex;align-items:center;gap:20px;padding:22px 4px;border:0;border-bottom:1px solid var(--line);cursor:pointer;transition:background .15s;width:100%;background:none;color:inherit;font:inherit;text-align:left}
 .svc-row:hover{background:rgba(53,104,255,.05)}
 .svc-row:first-child{border-top:1px solid var(--line)}
 .svc-name{font-size:19px;font-weight:600;flex:1}
 .svc-dur{font-family:var(--mono);font-size:12.5px;color:var(--mut);border:1px solid var(--line);border-radius:100px;padding:4px 11px;white-space:nowrap}
-.svc-price{font-family:var(--mono);font-size:19px;font-weight:600;color:var(--blue);min-width:70px;text-align:right}
+.svc-price{font-family:var(--mono);font-size:19px;font-weight:600;color:var(--blue-text);min-width:70px;text-align:right}
 .svc-note{color:var(--mut);font-size:14px;margin-top:22px}
 
 /* ══ BOOKING — ticket stubs ══ */
@@ -166,14 +172,15 @@ h1 .cut{color:var(--blue)}
 .steps3{display:flex;flex-direction:column;gap:0;margin-bottom:32px}
 .step{display:flex;gap:16px;padding:18px 0;border-bottom:1px dashed var(--line)}
 .step:last-child{border-bottom:none}
-.step .n{font-family:var(--mono);font-size:13px;color:var(--blue);border:1px solid var(--blue-dim);border-radius:4px;width:30px;height:30px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.step h4{font-size:16px;font-weight:600;margin-bottom:3px;text-transform:none;font-family:var(--body)}
+.step .n{font-family:var(--mono);font-size:13px;color:var(--blue-text);border:1px solid var(--blue-dim);border-radius:4px;width:30px;height:30px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.step h3{font-size:16px;font-weight:600;margin-bottom:3px;text-transform:none;font-family:var(--body)}
 .step p{color:var(--mut);font-size:14.5px}
 .phone-note{color:var(--mut);font-size:14.5px;margin-top:4px}
 .phone-note a{color:var(--ink);font-weight:600;border-bottom:1px solid var(--blue)}
 
 #booking-widget-mount .cbw{--cbw-accent:var(--blue);--cbw-ink:var(--ink);--cbw-mut:var(--mut);
   --cbw-line:var(--line);--cbw-bg:var(--bg-lift);--cbw-soft:#191E2A;--cbw-radius:10px;
+  --cbw-on-accent:#fff;--cbw-err:#FF6B5E;--cbw-field:rgba(237,239,243,.4);
   max-width:none;font-family:var(--body)}
 
 /* ══ TEAM ══ */
@@ -189,18 +196,18 @@ h1 .cut{color:var(--blue)}
 .loc-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px}
 @media(max-width:900px){.loc-grid{grid-template-columns:1fr}}
 .hours-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line);font-size:15px}
-.hours-row.today{color:var(--blue);font-weight:600}
+.hours-row.today{color:var(--blue-text);font-weight:600}
 .hours-row:last-child{border-bottom:none}
 .contact-card{background:var(--bg-lift);border:1px solid var(--line);border-radius:10px;padding:26px;margin-top:24px}
 .contact-card p{margin-bottom:10px;font-size:15px}
-.contact-card a.route{color:var(--blue);font-weight:600;font-size:14px}
+.contact-card a.route{color:var(--blue-text);font-weight:600;font-size:14px}
 .map-embed{margin-top:18px;border-radius:8px;overflow:hidden;border:1px solid var(--line);aspect-ratio:16/10;background:var(--bg)}
 .map-embed iframe{width:100%;height:100%;border:0;display:block}
 
 /* ══ REVIEWS ══ */
 .rev-head{display:flex;align-items:baseline;gap:16px;margin-bottom:40px;flex-wrap:wrap}
 .rev-score{font-family:var(--display);font-size:52px;color:var(--blue)}
-.stars{color:var(--blue);letter-spacing:2px}
+.stars{color:var(--blue-text);letter-spacing:2px}
 .rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 @media(max-width:900px){.rev-grid{grid-template-columns:1fr}}
 .rev-card{background:var(--bg-lift);border:1px solid var(--line);border-radius:10px;padding:22px}
@@ -217,17 +224,19 @@ footer.site{background:var(--bg-deep);padding:56px 0 30px;border-top:1px solid v
 @media(max-width:900px){
   .nav-links{position:fixed;inset:0 0 0 30%;background:var(--bg-deep);flex-direction:column;
     justify-content:center;align-items:flex-start;padding:40px;gap:28px;font-size:20px;
-    transform:translateX(100%);transition:transform .3s;border-left:1px solid var(--line)}
-  .nav-links.open{transform:translateX(0)}
+    transform:translateX(100%);visibility:hidden;transition:transform .3s,visibility .3s;border-left:1px solid var(--line)}
+  .nav-links.open{transform:translateX(0);visibility:visible}
   .burger{display:block}
 }
 </style>
 </head>
 <body>
 
-<nav id="nav">
+<a class="skip" href="#main">Zum Inhalt springen</a>
+
+<nav id="nav" aria-label="Hauptnavigation">
   <div class="wrap nav-in">
-    <a class="brand" href="#top">Blue<span>Barbershop</span></a>
+    <a class="brand" href="#top" aria-label="Blue Barbershop, zum Seitenanfang">Blue<span>Barbershop</span></a>
     <div class="nav-links" id="navLinks">
       <a href="#angebot">Angebot</a>
       <a href="#buchen">Termin</a>
@@ -235,10 +244,11 @@ footer.site{background:var(--bg-deep);padding:56px 0 30px;border-top:1px solid v
       <a href="#standort">Standort</a>
       <a class="btn btn-blue" href="#buchen">Termin buchen</a>
     </div>
-    <button class="burger" id="burger" aria-label="Menü">☰</button>
+    <button class="burger" id="burger" type="button" aria-label="Menü öffnen" aria-expanded="false" aria-controls="navLinks"><span aria-hidden="true">☰</span></button>
   </div>
 </nav>
 
+<main id="main">
 <header id="top">
   <div class="blade-ghost" aria-hidden="true"></div>
   <div class="wrap hero-grid">
@@ -250,13 +260,13 @@ footer.site{background:var(--bg-deep);padding:56px 0 30px;border-top:1px solid v
         <a class="btn btn-ghost" href="#angebot">Angebot ansehen</a>
       </div>
       <div class="stat-row">
-        <div class="stat"><b>5,0★</b><span>111 Bewertungen</span></div>
+        <div class="stat"><b>5,0<span aria-hidden="true">★</span><span class="sr-only"> von 5 Sternen,</span></b><span>111 Bewertungen</span></div>
         <div class="stat"><b>ab 13 €</b><span>pro Service</span></div>
         <div class="stat"><b>Mo–Sa</b><span>geöffnet</span></div>
       </div>
     </div>
     <div class="hero-card">
-      <div class="top"><span>Liebigstraße 1a</span><span class="rating"><b>5,0</b> ★★★★★</span></div>
+      <div class="top"><span>Liebigstraße 1a</span><span class="rating"><b>5,0</b> <span role="img" aria-label="5 von 5 Sternen">★★★★★</span></span></div>
       <ul>
         <li><span>Trockenhaarschnitt</span><b>18 €</b></li>
         <li><span>Haare inkl. Bart</span><b>31 €</b></li>
@@ -266,40 +276,40 @@ footer.site{background:var(--bg-deep);padding:56px 0 30px;border-top:1px solid v
   </div>
 </header>
 
-<div class="stripe"></div>
+<div class="stripe" aria-hidden="true"></div>
 
 <section id="angebot">
   <div class="wrap">
     <div class="eyebrow">Unser Angebot</div>
     <h2>Herrenservice</h2>
     <div class="svc-list" id="svcList">
-      <div class="svc-row" data-svc="trocken">
-        <div class="svc-name">Trockenhaarschnitt</div>
-        <div class="svc-dur">30 Min.</div>
-        <div class="svc-price">18 €</div>
-      </div>
-      <div class="svc-row" data-svc="bart-cut">
-        <div class="svc-name">Haare inkl. Bart</div>
-        <div class="svc-dur">1 Std.</div>
-        <div class="svc-price">31 €</div>
-      </div>
-      <div class="svc-row" data-svc="wsf">
-        <div class="svc-name">Waschen, Schneiden & Föhnen</div>
-        <div class="svc-dur">30 Min.</div>
-        <div class="svc-price">21 €</div>
-      </div>
-      <div class="svc-row" data-svc="maschine">
-        <div class="svc-name">Komplett mit der Maschine <span style="color:var(--mut);font-weight:400">— einheitliche Länge</span></div>
-        <div class="svc-dur">30 Min.</div>
-        <div class="svc-price">15 €</div>
-      </div>
-      <div class="svc-row" data-svc="kontur">
-        <div class="svc-name">Bartkontur mit dem Messer <span style="color:var(--mut);font-weight:400">— Modellierung</span></div>
-        <div class="svc-dur">30 Min.</div>
-        <div class="svc-price">13 €</div>
-      </div>
+      <button type="button" class="svc-row" data-svc="trocken">
+        <span class="svc-name">Trockenhaarschnitt</span>
+        <span class="svc-dur">30 Min.</span>
+        <span class="svc-price">18 €</span>
+      </button>
+      <button type="button" class="svc-row" data-svc="bart-cut">
+        <span class="svc-name">Haare inkl. Bart</span>
+        <span class="svc-dur">1 Std.</span>
+        <span class="svc-price">31 €</span>
+      </button>
+      <button type="button" class="svc-row" data-svc="wsf">
+        <span class="svc-name">Waschen, Schneiden & Föhnen</span>
+        <span class="svc-dur">30 Min.</span>
+        <span class="svc-price">21 €</span>
+      </button>
+      <button type="button" class="svc-row" data-svc="maschine">
+        <span class="svc-name">Komplett mit der Maschine <span style="color:var(--mut);font-weight:400">— einheitliche Länge</span></span>
+        <span class="svc-dur">30 Min.</span>
+        <span class="svc-price">15 €</span>
+      </button>
+      <button type="button" class="svc-row" data-svc="kontur">
+        <span class="svc-name">Bartkontur mit dem Messer <span style="color:var(--mut);font-weight:400">— Modellierung</span></span>
+        <span class="svc-dur">30 Min.</span>
+        <span class="svc-price">13 €</span>
+      </button>
     </div>
-    <p class="svc-note">Klick auf einen Service springt direkt zur passenden Terminauswahl. Weitere Leistungen auf Anfrage.</p>
+    <p class="svc-note">Ein Tipp auf einen Service öffnet direkt die passende Terminauswahl. Weitere Leistungen auf Anfrage.</p>
   </div>
 </section>
 
@@ -308,20 +318,20 @@ footer.site{background:var(--bg-deep);padding:56px 0 30px;border-top:1px solid v
     <div>
       <div class="eyebrow">Termin</div>
       <h2>In drei Schritten <em>gebucht.</em></h2>
-      <div class="steps3">
-        <div class="step">
-          <div class="n">1</div>
-          <div><h4>Service wählen</h4><p>Schnitt, Bart oder beides — direkt aus der Liste oben.</p></div>
-        </div>
-        <div class="step">
-          <div class="n">2</div>
-          <div><h4>Freien Slot picken</h4><p>Der Kalender zeigt nur, was am gewählten Tag wirklich frei ist.</p></div>
-        </div>
-        <div class="step">
-          <div class="n">3</div>
-          <div><h4>Bestätigung erhalten</h4><p>Per E-Mail, inklusive Kalendereintrag fürs Handy.</p></div>
-        </div>
-      </div>
+      <ol class="steps3" style="list-style:none">
+        <li class="step">
+          <div class="n" aria-hidden="true">1</div>
+          <div><h3>Service wählen</h3><p>Schnitt, Bart oder beides — direkt aus der Liste oben.</p></div>
+        </li>
+        <li class="step">
+          <div class="n" aria-hidden="true">2</div>
+          <div><h3>Freien Slot picken</h3><p>Der Kalender zeigt nur, was am gewählten Tag wirklich frei ist.</p></div>
+        </li>
+        <li class="step">
+          <div class="n" aria-hidden="true">3</div>
+          <div><h3>Bestätigung erhalten</h3><p>Per E-Mail, inklusive Kalendereintrag fürs Handy.</p></div>
+        </li>
+      </ol>
       <p class="phone-note">Lieber persönlich? Ruf uns an — Mo–Fr 8–20 Uhr, Sa 8–17 Uhr.</p>
     </div>
     <div id="booking-widget-mount"></div>
@@ -333,14 +343,14 @@ footer.site{background:var(--bg-deep);padding:56px 0 30px;border-top:1px solid v
     <div class="eyebrow">Das Team</div>
     <h2>Drei Barber, <em>ein Standard.</em></h2>
     <div class="team-grid">
-      <div class="team-card"><div class="avatar">A</div><b>Ahmed</b><span>Barber</span></div>
-      <div class="team-card"><div class="avatar">S</div><b>Saher</b><span>Barber</span></div>
-      <div class="team-card"><div class="avatar">A</div><b>Ali</b><span>Barber</span></div>
+      <div class="team-card"><div class="avatar" aria-hidden="true">A</div><b>Ahmed</b><span>Barber</span></div>
+      <div class="team-card"><div class="avatar" aria-hidden="true">S</div><b>Saher</b><span>Barber</span></div>
+      <div class="team-card"><div class="avatar" aria-hidden="true">A</div><b>Ali</b><span>Barber</span></div>
     </div>
   </div>
 </section>
 
-<div class="stripe"></div>
+<div class="stripe" aria-hidden="true"></div>
 
 <section id="standort">
   <div class="wrap loc-grid">
@@ -357,7 +367,7 @@ footer.site{background:var(--bg-deep);padding:56px 0 30px;border-top:1px solid v
     </div>
     <div class="contact-card">
       <p><b>Blue Barbershop</b><br>Liebigstraße 1a<br>40479 Düsseldorf</p>
-      <a class="route" href="https://maps.google.com/?q=Liebigstra%C3%9Fe+1a,+40479+D%C3%BCsseldorf" target="_blank" rel="noopener">Route öffnen →</a>
+      <a class="route" href="https://maps.google.com/?q=Liebigstra%C3%9Fe+1a,+40479+D%C3%BCsseldorf" target="_blank" rel="noopener">Route öffnen <span aria-hidden="true">→</span><span class="sr-only"> (öffnet Google Maps in neuem Tab)</span></a>
       <div class="map-embed">
         <iframe
           src="https://www.google.com/maps?q=Liebigstra%C3%9Fe+1a,+40479+D%C3%BCsseldorf&output=embed"
@@ -375,29 +385,31 @@ footer.site{background:var(--bg-deep);padding:56px 0 30px;border-top:1px solid v
     <div class="rev-head">
       <div class="rev-score">5,0</div>
       <div>
-        <div class="stars">★★★★★</div>
+        <div class="stars" role="img" aria-label="5 von 5 Sternen">★★★★★</div>
         <span style="color:var(--mut);font-size:14px">Basierend auf 111 Google-Bewertungen</span>
       </div>
     </div>
     <div class="rev-grid">
       <div class="rev-card">
-        <div class="stars">★★★★★</div>
+        <div class="stars" role="img" aria-label="5 von 5 Sternen">★★★★★</div>
         <p>„Hier steht bald eine echte Bewertung aus eurem Google-Profil — einfach kopieren und einfügen.“</p>
         <footer>Beispiel-Gast · Google, vor Kurzem</footer>
       </div>
       <div class="rev-card">
-        <div class="stars">★★★★★</div>
+        <div class="stars" role="img" aria-label="5 von 5 Sternen">★★★★★</div>
         <p>„Platzhalter-Zitat Nr. 2 — durch eine reale, mit Erlaubnis übernommene Bewertung ersetzen.“</p>
         <footer>Beispiel-Gast · Google, vor Kurzem</footer>
       </div>
       <div class="rev-card">
-        <div class="stars">★★★★★</div>
+        <div class="stars" role="img" aria-label="5 von 5 Sternen">★★★★★</div>
         <p>„Platzhalter-Zitat Nr. 3 — je aktueller die Bewertungen, desto glaubwürdiger für neue Gäste.“</p>
         <footer>Beispiel-Gast · Google, vor Kurzem</footer>
       </div>
     </div>
   </div>
 </section>
+
+</main>
 
 <footer class="site">
   <div class="wrap">
@@ -424,8 +436,17 @@ footer.site{background:var(--bg-deep);padding:56px 0 30px;border-top:1px solid v
   var nav = document.getElementById('nav');
   addEventListener('scroll', function(){ nav.classList.toggle('stuck', scrollY > 10); }, { passive: true });
   var burger = document.getElementById('burger'), links = document.getElementById('navLinks');
-  burger.addEventListener('click', function(){ links.classList.toggle('open'); });
-  links.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ links.classList.remove('open'); }); });
+  function setMenu(open){
+    links.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    burger.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen');
+    if (open) setTimeout(function(){ links.querySelector('a').focus(); }, 60);
+  }
+  burger.addEventListener('click', function(){ setMenu(!links.classList.contains('open')); });
+  links.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ setMenu(false); }); });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && links.classList.contains('open')) { setMenu(false); burger.focus(); }
+  });
 
   // booking widget
   var widget = BookingWidget.init({
