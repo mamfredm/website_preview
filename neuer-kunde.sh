@@ -25,7 +25,7 @@ cp -R muster "$slug"
 
 # Namen einsetzen (& und / im Namen für sed entschärfen)
 safe=$(printf '%s' "$name" | sed -e 's/[&/\]/\\&/g')
-for f in "$slug/index.html" "$slug/website/index.html"; do
+for f in "$slug/index.html" "$slug/website/index.html" "$slug/angebot.json"; do
   sed -i.bak "s/Musterfirma/$safe/g" "$f" && rm "$f.bak"
 done
 

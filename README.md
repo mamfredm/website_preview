@@ -26,6 +26,20 @@ Das Bild ist `assets/kontakt-foto.jpg` (quadratisch, JPEG, ca. 256×256).
 Telefonnummer, Foto oder Titel ändern: oben im Skript anpassen bzw. Bild
 ersetzen und das Skript einmal ausführen.
 
+## Angebots-Button („Angebot & Preise“)
+
+Schwebender Button unten links in der Vorschau. Beim Antippen öffnet sich ein
+Panel mit den maßgeschneiderten Punkten und Preisen aus `/<kunde>/angebot.json`.
+
+- **Inhalt pflegen:** `angebot.json` im Kundenordner bearbeiten
+  (`loesungen` = Liste, `preise` = Name, Preis, Hinweis, optional `"optional": true`).
+- **Einbinden:** In `website/index.html` vor `</body>`:
+  `<script src="/assets/info-button.js" defer></script>`
+  (in der Vorlage `muster` schon drin).
+- **Ausblenden:** `angebot.json` löschen, dann erscheint kein Button.
+- Läuft nur auf `preview.click-capybara.com` und Testadressen. Auf der späteren
+  Live-Domain des Kunden bleibt er unsichtbar, auch wenn die Zeile drinbleibt.
+
 ## Aufbau
 
 | Pfad | Zweck |
@@ -37,6 +51,8 @@ ersetzen und das Skript einmal ausführen.
 | `kontakt.vcf` | Allgemeine Kontaktkarte (Startseite, 404) |
 | `/<kunde>/kontakt.vcf` | Kontaktkarte mit Link zur Vorschau des Kunden |
 | `kontaktkarten.sh` | Erzeugt alle Kontaktkarten neu |
+| `/<kunde>/angebot.json` | Inhalt des Angebots-Buttons |
+| `assets/info-button.js` | Angebots-Button für alle Vorschauen |
 | `assets/style.css` | Gemeinsames Design aller Zwischenseiten |
 | `_headers` | noindex für alles + Dateityp der Kontaktkarte |
 
