@@ -15,6 +15,16 @@ Nichts hier wird von Google indexiert (Regel in `_headers`).
 
 Ohne Terminal geht es auch: Ordner `muster` kopieren, umbenennen und
 in `index.html` das Wort „Musterfirma“ durch den Kundennamen ersetzen.
+Danach `./kontaktkarten.sh` ausführen (oder in der `kontakt.vcf` des neuen
+Ordners `/muster/` durch `/<kunde>/` ersetzen).
+
+## Kontaktkarten
+
+`./kontaktkarten.sh` erzeugt alle Karten neu: die allgemeine `kontakt.vcf`
+und pro Kunde eine eigene mit dem Link „Deine Website-Vorschau“.
+Das Bild ist `assets/kontakt-foto.jpg` (quadratisch, JPEG, ca. 256×256).
+Telefonnummer, Foto oder Titel ändern: oben im Skript anpassen bzw. Bild
+ersetzen und das Skript einmal ausführen.
 
 ## Aufbau
 
@@ -24,7 +34,9 @@ in `index.html` das Wort „Musterfirma“ durch den Kundennamen ersetzen.
 | `/<kunde>/website/` | Die eigentliche Vorschau |
 | `/` | Allgemeine Seite (Kontakt + click-capybara.com) |
 | `404.html` | Für unbekannte oder gelöschte Vorschauen |
-| `kontakt.vcf` | Kontaktkarte für alle Seiten |
+| `kontakt.vcf` | Allgemeine Kontaktkarte (Startseite, 404) |
+| `/<kunde>/kontakt.vcf` | Kontaktkarte mit Link zur Vorschau des Kunden |
+| `kontaktkarten.sh` | Erzeugt alle Kontaktkarten neu |
 | `assets/style.css` | Gemeinsames Design aller Zwischenseiten |
 | `_headers` | noindex für alles + Dateityp der Kontaktkarte |
 
@@ -38,4 +50,4 @@ Kontaktmöglichkeit statt auf einer Fehlermeldung.
 - **Keine `robots.txt` mit `Disallow` anlegen.** Sonst kann Google das noindex nicht lesen.
 - Kürzel nur aus Kleinbuchstaben, Ziffern und Bindestrichen (`ae` statt `ä`).
 - Pfade in den Vorschauen relativ halten (`css/style.css`, nicht `/css/style.css`).
-- Telefonnummer später in `kontakt.vcf` ergänzen: `TEL;TYPE=WORK,VOICE:+49...`
+- Telefonnummer später oben in `kontaktkarten.sh` eintragen und das Skript ausführen.
