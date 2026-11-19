@@ -9,3 +9,8 @@
   Content-Type: text/vcard; charset=utf-8
   Content-Disposition: inline; filename="Max-Mueller-Click-Capybara.vcf"
   Cache-Control: public, max-age=3600
+
+/:kunde/kontakt.vcf
+  Content-Type: text/vcard; charset=utf-8
+  Content-Disposition: inline; filename="Max-Mueller-Click-Capybara.vcf"
+  Cache-Control: public, max-age=3600

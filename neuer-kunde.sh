@@ -29,7 +29,9 @@ for f in "$slug/index.html" "$slug/website/index.html"; do
   sed -i.bak "s/Musterfirma/$safe/g" "$f" && rm "$f.bak"
 done
 
-echo "Fertig: $slug/"
+./kontaktkarten.sh >/dev/null
+
+echo "Fertig: $slug/ (inkl. eigener Kontaktkarte)"
 echo "1. Vorschau-Dateien nach $slug/website/ legen (index.html dort ersetzen)"
 echo "2. Committen und pushen"
 echo "3. Auf den NFC-Tag schreiben: https://preview.click-capybara.com/$slug"
