@@ -11,6 +11,14 @@
   --radius: 18px;
 }
 
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("/assets/fonts/space-grotesk-latin.woff") format("woff");
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 html { -webkit-text-size-adjust: 100%; }
@@ -38,26 +46,26 @@ main {
   flex-direction: column;
 }
 
-/* Wortmarke mit blinkendem gelben Balken */
+/* Logo + Wortmarke mit blinkendem gelben Strich dahinter (wie auf click-capybara.com) */
 .marke {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  font-weight: 700;
-  font-size: 1.05rem;
-  letter-spacing: -0.01em;
+  min-height: 44px;
+  font: 700 1.15rem "Space Grotesk", system-ui, sans-serif;
   color: var(--text);
   text-decoration: none;
 }
-.marke::before {
-  content: "";
-  width: 6px;
-  height: 22px;
-  border-radius: 2px;
+.marke img { display: block; flex: none; }
+.marke .caret {
+  display: inline-block;
+  flex: none;
+  width: 10px;
+  height: 20px;
   background: var(--gelb);
-  animation: blinken 1.1s steps(1) infinite;
+  animation: blinken 1s steps(1) infinite;
 }
-@keyframes blinken { 50% { opacity: 0; } }
+@keyframes blinken { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
 
 .buehne {
   margin: auto 0;
@@ -151,6 +159,6 @@ footer a { color: inherit; text-decoration: none; }
 footer a:hover { color: var(--leise); }
 
 @media (prefers-reduced-motion: reduce) {
-  .marke::before { animation: none; }
+  .marke .caret { animation: none; }
   .knopf { transition: none; }
 }
