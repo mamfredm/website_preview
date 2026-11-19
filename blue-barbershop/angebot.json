@@ -1,0 +1,21 @@
+{
+  "kunde": "Blue Barbershop",
+  "button": "Angebot & Preise",
+  "vorzeile": "Dein Angebot",
+  "titel": "Diese Website für Blue Barbershop",
+  "loesungen": [
+    "Die Website aus dieser Vorschau, schnell und fürs Handy gebaut, ohne Baukasten-Abo",
+    "Online-Terminbuchung mit Wahl des Barbers und Bestätigung per E-Mail",
+    "Google-Unternehmensprofil eingerichtet, damit euch Leute auf Google Maps finden",
+    "Sichtbar in der KI-Suche wie ChatGPT und Gemini",
+    "Impressum, Datenschutz und Cookie-Hinweis inklusive",
+    "Gehört euch: keine monatlichen Kosten bei mir"
+  ],
+  "preise": [
+    { "name": "Local Hero Kit", "preis": "1.150 €", "hinweis": "einmalig · Angebotspreis bis 01.03.2027, danach 1.500 €" },
+    { "name": "Online-Terminbuchung", "preis": "ab 490 €", "hinweis": "einmalig · Angebotspreis bis 01.03.2027, danach ab 590 €" },
+    { "name": "Domain und E-Mail", "preis": "ab 2 € / Monat", "hinweis": "zahlt ihr direkt beim Anbieter, kein Abo bei mir" },
+    { "name": "Google Ads, Paket S", "preis": "395 € / Monat", "hinweis": "5 Stunden Betreuung, monatlich kündbar · bis 01.03.2027, danach 500 €", "optional": true }
+  ],
+  "fussnote": "Alle Preise zzgl. gesetzlicher Umsatzsteuer, soweit sie anfällt. Erste Einschätzung kostenlos."
+}
