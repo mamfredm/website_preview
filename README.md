@@ -40,6 +40,15 @@ Panel mit den maßgeschneiderten Punkten und Preisen aus `/<kunde>/angebot.json`
 - Läuft nur auf `preview.click-capybara.com` und Testadressen. Auf der späteren
   Live-Domain des Kunden bleibt er unsichtbar, auch wenn die Zeile drinbleibt.
 
+## Vorschau-Übersicht (Testadressen)
+
+Auf den Cloudflare-Testadressen (`<branch>.website-preview-4pv.pages.dev`) zeigt die
+Startseite oben eine Liste aller Kundenseiten, im Branch geänderte zuerst. So führt
+auch der Link aus der Cloudflare-Mail mit einem Klick zur richtigen Kundenseite.
+Die Liste erzeugt `build.sh` beim Deploy. Dafür in Cloudflare unter
+Settings → Build → Build command: `bash build.sh` eintragen.
+Auf `preview.click-capybara.com` (main) entsteht keine Liste.
+
 ## Aufbau
 
 | Pfad | Zweck |

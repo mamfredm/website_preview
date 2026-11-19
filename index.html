@@ -36,5 +36,28 @@
     <a href="https://click-capybara.com/impressum">Impressum</a>
     <a href="https://click-capybara.com/privacy">Datenschutz</a>
   </footer>
+
+  <!-- Vorschau-Übersicht: nur auf Cloudflare-Testadressen (Branch/Commit), nie auf preview.click-capybara.com -->
+  <script>
+  (function () {
+    if (!/\.website-preview-4pv\.pages\.dev$/.test(location.hostname)) return;
+    fetch('/_vorschau.json', { cache: 'no-cache' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) {
+      if (!d || !d.kunden || !d.kunden.length) return;
+      d.kunden.sort(function (a, b) { return (b.geaendert - a.geaendert) || a.ordner.localeCompare(b.ordner); });
+      var box = document.createElement('section');
+      box.className = 'testliste';
+      box.innerHTML = '<p class="vorzeile">Testversion · Branch ' + d.branch.replace(/[<>&]/g, '') + '</p><h2>Kundenseiten</h2>';
+      d.kunden.forEach(function (k) {
+        var a = document.createElement('a');
+        a.className = 'knopf ' + (k.geaendert ? 'knopf-haupt' : 'knopf-neben');
+        a.href = '/' + k.ordner + '/website/';
+        a.innerHTML = '<span>' + k.ordner + '<small>' + (k.geaendert ? 'In diesem Branch geändert' : 'Unverändert') + '</small></span><span class="pfeil" aria-hidden="true">→</span>';
+        box.appendChild(a);
+      });
+      var main = document.querySelector('main');
+      main.insertBefore(box, main.children[1]);
+    }).catch(function () {});
+  })();
+  </script>
 </body>
 </html>
