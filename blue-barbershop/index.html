@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blue Barbershop Düsseldorf — Herrenfriseur & Barber in der Liebigstraße</title>
+<meta name="description" content="Blue Barbershop in Düsseldorf: Haarschnitt, Bart & Kontur vom Profi. 5,0★ bei 111 Bewertungen. Termin online buchen — Liebigstraße 1a.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<!--
+  🚀 Click-Capybara Sandbox — Demo für Blue Barbershop.
+  TODO vor Live-Schaltung:
+  1) BOOKING_ENDPOINT unten (kurz vor </body>) durch die echte Google-Apps-Script-URL ersetzen
+     (aktuell 'mock' — Kalender zeigt Fantasie-Termine).
+  2) GOOGLE_PLACE_ID im <script> unten durch die echte Place-ID ersetzen.
+  3) Die drei Beispielzitate im Abschnitt #bewertungen durch echte, mit Erlaubnis übernommene
+     Gästestimmen ersetzen — Rating 5,0 / 111 Bewertungen stammt von Planity und sollte gegen
+     das echte Google-Profil geprüft werden, bevor es als Rich-Snippet ausgezeichnet wird.
+  4) Fotos vom Laden/Team ergänzen (aktuell nur Initialen-Kacheln).
+  5) Mitarbeiter-Auswahl im Booking-Widget ist aktiv (Ahmed/Saher/Ali + "Keine Präferenz").
+     Sobald das echte Backend dran ist, muss es das Feld "staff" aus dem Buchungs-Payload
+     auswerten (leer = keine Präferenz) und pro Mitarbeiter eigene Verfügbarkeit liefern.
+     Fotos: aktuell Initialen-Platzhalter — echtes Foto einfach als "photo"-URL pro Person
+     in der staff-Konfiguration in index.html ergänzen.
+  6) Die eingebettete Google-Karte unter "Route öffnen" nutzt den kostenlosen Embed-Trick
+     ohne API-Key (maps.google.com/maps?...&output=embed). Läuft zuverlässig für eine Demo,
+     für den Live-Betrieb empfiehlt Google offiziell die Maps Embed API mit eigenem Key.
+-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HairSalon",
+  "name": "Blue Barbershop",
+  "priceRange": "€€",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Liebigstraße 1a",
+    "addressLocality": "Düsseldorf",
+    "postalCode": "40479",
+    "addressCountry": "DE"
+  },
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "08:00", "closes": "20:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "08:00", "closes": "17:00" }
+  ]
+}
+</script>
+
+<style>
+:root{
+  --bg:#0A0D12;          /* near-black, cool */
+  --bg-lift:#12161F;     /* cards / raised surfaces */
+  --bg-deep:#06080B;     /* footer / recesses */
+  --ink:#EDEFF3;         /* primary text */
+  --mut:#8890A0;         /* secondary text */
+  --blue:#3568FF;        /* brand accent — "Blue" */
+  --blue-dim:#1E3B8A;
+  --steel:#B9BDC6;       /* chrome / razor counterpoint */
+  --line:rgba(237,239,243,.12);
+
+  --display:"Anton",Impact,sans-serif;
+  --body:"Inter",-apple-system,BlinkMacSystemFont,sans-serif;
+  --mono:"JetBrains Mono",monospace;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}
+  *{animation:none!important;transition:none!important}}
+
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--body);
+  font-weight:400;
+  font-size:17px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+
+.wrap{width:min(1120px,92vw);margin:0 auto}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:3px}
+
+/* signature element: thin diagonal "barber stripe" rule, used as a divider — not a literal pole */
+.stripe{
+  height:6px;background:repeating-linear-gradient(-45deg,var(--blue) 0 14px,#C0263B 14px 28px,var(--ink) 28px 42px);
+  opacity:.9;
+}
+
+.eyebrow{
+  font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--blue);font-weight:500;margin-bottom:16px;
+  display:flex;align-items:center;gap:12px;
+}
+.eyebrow::after{content:"";flex:1;height:1px;background:var(--line);max-width:80px}
+
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.02;letter-spacing:.005em;text-transform:uppercase}
+h2{font-size:clamp(30px,4.2vw,48px);margin-bottom:16px}
+h2 em{font-style:normal;color:var(--blue)}
+
+section{padding:96px 0}
+@media(max-width:640px){section{padding:64px 0}}
+
+/* ══ NAV ══ */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;padding:18px 0;transition:background .3s,padding .3s,border-color .3s;border-bottom:1px solid transparent}
+nav.stuck{border-bottom-color:var(--line);padding:12px 0}
+nav.stuck::before{content:"";position:absolute;inset:0;z-index:-1;background:rgba(10,13,18,.92);backdrop-filter:blur(14px)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{font-family:var(--display);font-size:20px;letter-spacing:.02em;white-space:nowrap;text-transform:uppercase}
+.brand span{color:var(--blue)}
+.nav-links{display:flex;align-items:center;gap:30px;font-size:14px}
+.nav-links a{color:var(--mut);transition:color .2s}
+.nav-links a:hover{color:var(--ink)}
+
+.btn{display:inline-block;padding:13px 26px;border-radius:4px;font-family:var(--body);font-size:14.5px;font-weight:600;letter-spacing:.02em;cursor:pointer;border:1px solid transparent;transition:all .2s}
+.btn-blue{background:var(--blue);color:#fff}
+.btn-blue:hover{background:#4C79FF;transform:translateY(-1px)}
+.btn-ghost{border-color:var(--line);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--blue);color:var(--blue)}
+.burger{display:none;background:none;border:0;color:var(--ink);font-size:24px;cursor:pointer;padding:4px 8px}
+
+/* ══ HERO ══ */
+header{position:relative;min-height:92svh;display:flex;align-items:center;padding:120px 0 60px;overflow:hidden}
+.blade-ghost{
+  position:absolute;right:-6%;top:50%;transform:translateY(-50%) rotate(-8deg);
+  width:min(46vw,560px);aspect-ratio:1/2.4;
+  background:linear-gradient(160deg,rgba(53,104,255,.10),rgba(185,189,198,.04));
+  border:1px solid var(--line);border-radius:999px 999px 40px 40px;
+  pointer-events:none;user-select:none;
+}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:60px;align-items:end;position:relative}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr}}
+h1{font-size:clamp(46px,8vw,96px);margin-bottom:20px}
+h1 .cut{color:var(--blue)}
+.hero-sub{color:var(--mut);font-size:18px;max-width:46ch;margin-bottom:36px}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:56px}
+.stat-row{display:flex;gap:34px;flex-wrap:wrap}
+.stat b{display:block;font-family:var(--display);font-size:32px;color:var(--ink)}
+.stat span{color:var(--mut);font-size:13px;text-transform:uppercase;letter-spacing:.06em}
+
+.hero-card{background:var(--bg-lift);border:1px solid var(--line);border-radius:10px;padding:26px;font-family:var(--mono)}
+.hero-card .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;font-size:13px;color:var(--mut)}
+.hero-card .rating{color:var(--ink);font-size:15px;font-weight:600}
+.hero-card .rating b{color:var(--blue)}
+.hero-card ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+.hero-card li{display:flex;justify-content:space-between;font-size:14px;border-bottom:1px dashed var(--line);padding-bottom:11px}
+.hero-card li:last-child{border-bottom:none;padding-bottom:0}
+.hero-card li b{color:var(--blue);font-weight:600}
+
+/* ══ SERVICES — menu board ══ */
+.svc-list{display:flex;flex-direction:column}
+.svc-row{display:flex;align-items:center;gap:20px;padding:22px 4px;border-bottom:1px solid var(--line);cursor:pointer;transition:background .15s}
+.svc-row:hover{background:rgba(53,104,255,.05)}
+.svc-row:first-child{border-top:1px solid var(--line)}
+.svc-name{font-size:19px;font-weight:600;flex:1}
+.svc-dur{font-family:var(--mono);font-size:12.5px;color:var(--mut);border:1px solid var(--line);border-radius:100px;padding:4px 11px;white-space:nowrap}
+.svc-price{font-family:var(--mono);font-size:19px;font-weight:600;color:var(--blue);min-width:70px;text-align:right}
+.svc-note{color:var(--mut);font-size:14px;margin-top:22px}
+
+/* ══ BOOKING — ticket stubs ══ */
+.book-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+@media(max-width:900px){.book-grid{grid-template-columns:1fr}}
+.steps3{display:flex;flex-direction:column;gap:0;margin-bottom:32px}
+.step{display:flex;gap:16px;padding:18px 0;border-bottom:1px dashed var(--line)}
+.step:last-child{border-bottom:none}
+.step .n{font-family:var(--mono);font-size:13px;color:var(--blue);border:1px solid var(--blue-dim);border-radius:4px;width:30px;height:30px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.step h4{font-size:16px;font-weight:600;margin-bottom:3px;text-transform:none;font-family:var(--body)}
+.step p{color:var(--mut);font-size:14.5px}
+.phone-note{color:var(--mut);font-size:14.5px;margin-top:4px}
+.phone-note a{color:var(--ink);font-weight:600;border-bottom:1px solid var(--blue)}
+
+#booking-widget-mount .cbw{--cbw-accent:var(--blue);--cbw-ink:var(--ink);--cbw-mut:var(--mut);
+  --cbw-line:var(--line);--cbw-bg:var(--bg-lift);--cbw-soft:#191E2A;--cbw-radius:10px;
+  max-width:none;font-family:var(--body)}
+
+/* ══ TEAM ══ */
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:640px){.team-grid{grid-template-columns:1fr}}
+.team-card{background:var(--bg-lift);border:1px solid var(--line);border-radius:10px;padding:26px;text-align:center}
+.avatar{width:64px;height:64px;border-radius:50%;background:linear-gradient(160deg,var(--blue),var(--blue-dim));
+  display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-family:var(--display);font-size:22px}
+.team-card b{display:block;font-size:16px;margin-bottom:2px}
+.team-card span{color:var(--mut);font-size:13.5px}
+
+/* ══ LOCATION ══ */
+.loc-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+@media(max-width:900px){.loc-grid{grid-template-columns:1fr}}
+.hours-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line);font-size:15px}
+.hours-row.today{color:var(--blue);font-weight:600}
+.hours-row:last-child{border-bottom:none}
+.contact-card{background:var(--bg-lift);border:1px solid var(--line);border-radius:10px;padding:26px;margin-top:24px}
+.contact-card p{margin-bottom:10px;font-size:15px}
+.contact-card a.route{color:var(--blue);font-weight:600;font-size:14px}
+.map-embed{margin-top:18px;border-radius:8px;overflow:hidden;border:1px solid var(--line);aspect-ratio:16/10;background:var(--bg)}
+.map-embed iframe{width:100%;height:100%;border:0;display:block}
+
+/* ══ REVIEWS ══ */
+.rev-head{display:flex;align-items:baseline;gap:16px;margin-bottom:40px;flex-wrap:wrap}
+.rev-score{font-family:var(--display);font-size:52px;color:var(--blue)}
+.stars{color:var(--blue);letter-spacing:2px}
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:900px){.rev-grid{grid-template-columns:1fr}}
+.rev-card{background:var(--bg-lift);border:1px solid var(--line);border-radius:10px;padding:22px}
+.rev-card p{font-size:14.5px;color:var(--ink);margin:12px 0 14px;line-height:1.55}
+.rev-card footer{color:var(--mut);font-size:13px}
+
+/* ══ FOOTER ══ */
+footer.site{background:var(--bg-deep);padding:56px 0 30px;border-top:1px solid var(--line)}
+.foot-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:26px;margin-bottom:34px}
+.foot-links{display:flex;gap:24px;flex-wrap:wrap;font-size:14px;color:var(--mut)}
+.foot-links a:hover{color:var(--ink)}
+.foot-bottom{color:var(--mut);font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+
+@media(max-width:900px){
+  .nav-links{position:fixed;inset:0 0 0 30%;background:var(--bg-deep);flex-direction:column;
+    justify-content:center;align-items:flex-start;padding:40px;gap:28px;font-size:20px;
+    transform:translateX(100%);transition:transform .3s;border-left:1px solid var(--line)}
+  .nav-links.open{transform:translateX(0)}
+  .burger{display:block}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top">Blue<span>Barbershop</span></a>
+    <div class="nav-links" id="navLinks">
+      <a href="#angebot">Angebot</a>
+      <a href="#buchen">Termin</a>
+      <a href="#team">Team</a>
+      <a href="#standort">Standort</a>
+      <a class="btn btn-blue" href="#buchen">Termin buchen</a>
+    </div>
+    <button class="burger" id="burger" aria-label="Menü">☰</button>
+  </div>
+</nav>
+
+<header id="top">
+  <div class="blade-ghost" aria-hidden="true"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <h1>Präziser<br><span class="cut">Schnitt.</span><br>Klare Kontur.</h1>
+      <p class="hero-sub">Barbershop in der Liebigstraße — Haarschnitt, Bart und Kontur von einem eingespielten Team. Termin in unter einer Minute online reservieren.</p>
+      <div class="hero-cta">
+        <a class="btn btn-blue" href="#buchen">Termin online buchen</a>
+        <a class="btn btn-ghost" href="#angebot">Angebot ansehen</a>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><b>5,0★</b><span>111 Bewertungen</span></div>
+        <div class="stat"><b>ab 13 €</b><span>pro Service</span></div>
+        <div class="stat"><b>Mo–Sa</b><span>geöffnet</span></div>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="top"><span>Liebigstraße 1a</span><span class="rating"><b>5,0</b> ★★★★★</span></div>
+      <ul>
+        <li><span>Trockenhaarschnitt</span><b>18 €</b></li>
+        <li><span>Haare inkl. Bart</span><b>31 €</b></li>
+        <li><span>Bartkontur mit dem Messer</span><b>13 €</b></li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<div class="stripe"></div>
+
+<section id="angebot">
+  <div class="wrap">
+    <div class="eyebrow">Unser Angebot</div>
+    <h2>Herrenservice</h2>
+    <div class="svc-list" id="svcList">
+      <div class="svc-row" data-svc="trocken">
+        <div class="svc-name">Trockenhaarschnitt</div>
+        <div class="svc-dur">30 Min.</div>
+        <div class="svc-price">18 €</div>
+      </div>
+      <div class="svc-row" data-svc="bart-cut">
+        <div class="svc-name">Haare inkl. Bart</div>
+        <div class="svc-dur">1 Std.</div>
+        <div class="svc-price">31 €</div>
+      </div>
+      <div class="svc-row" data-svc="wsf">
+        <div class="svc-name">Waschen, Schneiden & Föhnen</div>
+        <div class="svc-dur">30 Min.</div>
+        <div class="svc-price">21 €</div>
+      </div>
+      <div class="svc-row" data-svc="maschine">
+        <div class="svc-name">Komplett mit der Maschine <span style="color:var(--mut);font-weight:400">— einheitliche Länge</span></div>
+        <div class="svc-dur">30 Min.</div>
+        <div class="svc-price">15 €</div>
+      </div>
+      <div class="svc-row" data-svc="kontur">
+        <div class="svc-name">Bartkontur mit dem Messer <span style="color:var(--mut);font-weight:400">— Modellierung</span></div>
+        <div class="svc-dur">30 Min.</div>
+        <div class="svc-price">13 €</div>
+      </div>
+    </div>
+    <p class="svc-note">Klick auf einen Service springt direkt zur passenden Terminauswahl. Weitere Leistungen auf Anfrage.</p>
+  </div>
+</section>
+
+<section id="buchen" style="background:var(--bg-lift)">
+  <div class="wrap book-grid">
+    <div>
+      <div class="eyebrow">Termin</div>
+      <h2>In drei Schritten <em>gebucht.</em></h2>
+      <div class="steps3">
+        <div class="step">
+          <div class="n">1</div>
+          <div><h4>Service wählen</h4><p>Schnitt, Bart oder beides — direkt aus der Liste oben.</p></div>
+        </div>
+        <div class="step">
+          <div class="n">2</div>
+          <div><h4>Freien Slot picken</h4><p>Der Kalender zeigt nur, was am gewählten Tag wirklich frei ist.</p></div>
+        </div>
+        <div class="step">
+          <div class="n">3</div>
+          <div><h4>Bestätigung erhalten</h4><p>Per E-Mail, inklusive Kalendereintrag fürs Handy.</p></div>
+        </div>
+      </div>
+      <p class="phone-note">Lieber persönlich? Ruf uns an — Mo–Fr 8–20 Uhr, Sa 8–17 Uhr.</p>
+    </div>
+    <div id="booking-widget-mount"></div>
+  </div>
+</section>
+
+<section id="team">
+  <div class="wrap">
+    <div class="eyebrow">Das Team</div>
+    <h2>Drei Barber, <em>ein Standard.</em></h2>
+    <div class="team-grid">
+      <div class="team-card"><div class="avatar">A</div><b>Ahmed</b><span>Barber</span></div>
+      <div class="team-card"><div class="avatar">S</div><b>Saher</b><span>Barber</span></div>
+      <div class="team-card"><div class="avatar">A</div><b>Ali</b><span>Barber</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="stripe"></div>
+
+<section id="standort">
+  <div class="wrap loc-grid">
+    <div>
+      <div class="eyebrow">Standort</div>
+      <h2>Liebigstraße 1a</h2>
+      <div class="hours-row"><span>Montag</span><span>08:00 – 20:00</span></div>
+      <div class="hours-row"><span>Dienstag</span><span>08:00 – 20:00</span></div>
+      <div class="hours-row"><span>Mittwoch</span><span>08:00 – 20:00</span></div>
+      <div class="hours-row"><span>Donnerstag</span><span>08:00 – 20:00</span></div>
+      <div class="hours-row"><span>Freitag</span><span>08:00 – 20:00</span></div>
+      <div class="hours-row"><span>Samstag</span><span>08:00 – 17:00</span></div>
+      <div class="hours-row"><span>Sonntag</span><span>Geschlossen</span></div>
+    </div>
+    <div class="contact-card">
+      <p><b>Blue Barbershop</b><br>Liebigstraße 1a<br>40479 Düsseldorf</p>
+      <a class="route" href="https://maps.google.com/?q=Liebigstra%C3%9Fe+1a,+40479+D%C3%BCsseldorf" target="_blank" rel="noopener">Route öffnen →</a>
+      <div class="map-embed">
+        <iframe
+          src="https://www.google.com/maps?q=Liebigstra%C3%9Fe+1a,+40479+D%C3%BCsseldorf&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Karte: Blue Barbershop, Liebigstraße 1a, Düsseldorf"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="bewertungen" style="background:var(--bg-lift)">
+  <div class="wrap">
+    <div class="eyebrow">Bewertungen</div>
+    <div class="rev-head">
+      <div class="rev-score">5,0</div>
+      <div>
+        <div class="stars">★★★★★</div>
+        <span style="color:var(--mut);font-size:14px">Basierend auf 111 Google-Bewertungen</span>
+      </div>
+    </div>
+    <div class="rev-grid">
+      <div class="rev-card">
+        <div class="stars">★★★★★</div>
+        <p>„Hier steht bald eine echte Bewertung aus eurem Google-Profil — einfach kopieren und einfügen.“</p>
+        <footer>Beispiel-Gast · Google, vor Kurzem</footer>
+      </div>
+      <div class="rev-card">
+        <div class="stars">★★★★★</div>
+        <p>„Platzhalter-Zitat Nr. 2 — durch eine reale, mit Erlaubnis übernommene Bewertung ersetzen.“</p>
+        <footer>Beispiel-Gast · Google, vor Kurzem</footer>
+      </div>
+      <div class="rev-card">
+        <div class="stars">★★★★★</div>
+        <p>„Platzhalter-Zitat Nr. 3 — je aktueller die Bewertungen, desto glaubwürdiger für neue Gäste.“</p>
+        <footer>Beispiel-Gast · Google, vor Kurzem</footer>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-top">
+      <a class="brand" href="#top">Blue<span>Barbershop</span></a>
+      <div class="foot-links">
+        <a href="#angebot">Angebot</a>
+        <a href="#buchen">Termin buchen</a>
+        <a href="#standort">Standort</a>
+        <a href="https://click-capybara.github.io/datenschutz/">Datenschutz</a>
+        <a href="https://click-capybara.github.io/impressum/">Impressum</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Blue Barbershop Düsseldorf</span>
+      <span>Liebigstraße 1a · 40479 Düsseldorf</span>
+    </div>
+  </div>
+</footer>
+
+<script src="booking-widget.js"></script>
+<script>
+  // nav scroll state + mobile menu
+  var nav = document.getElementById('nav');
+  addEventListener('scroll', function(){ nav.classList.toggle('stuck', scrollY > 10); }, { passive: true });
+  var burger = document.getElementById('burger'), links = document.getElementById('navLinks');
+  burger.addEventListener('click', function(){ links.classList.toggle('open'); });
+  links.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ links.classList.remove('open'); }); });
+
+  // booking widget
+  var widget = BookingWidget.init({
+    el: '#booking-widget-mount',
+    endpoint: 'mock', // TODO: echte Google-Apps-Script-URL einsetzen
+    lang: 'de',
+    accent: '#3568FF',
+    staff: [
+      { id: 'ahmed', name: 'Ahmed' },
+      { id: 'saher', name: 'Saher' },
+      { id: 'ali',   name: 'Ali' }
+    ]
+  });
+
+  // service rows jump straight into the booking flow with that service pre-selected
+  document.querySelectorAll('.svc-row').forEach(function(row){
+    row.addEventListener('click', function(){
+      widget.selectService(row.dataset.svc);
+      document.getElementById('buchen').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+</body>
+</html>
