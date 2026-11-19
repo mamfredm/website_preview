@@ -1,0 +1,10 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Müller;Max;;;
+FN:Max Müller
+ORG:Click-Capybara
+TITLE:Digital Marketing Spezialist
+EMAIL;TYPE=INTERNET,WORK:hello@click-capybara.com
+URL:https://click-capybara.com
+NOTE:Google Ads · Websites · Lokale Sichtbarkeit
+END:VCARD

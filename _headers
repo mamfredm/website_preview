@@ -1,0 +1,11 @@
+# Gilt für ALLE Dateien dieser Subdomain: nichts davon soll bei Google landen.
+# Wichtig: KEINE robots.txt mit "Disallow" anlegen, sonst sieht Google dieses noindex nie.
+/*
+  X-Robots-Tag: noindex, nofollow, noarchive
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Content-Type-Options: nosniff
+
+/kontakt.vcf
+  Content-Type: text/vcard; charset=utf-8
+  Content-Disposition: inline; filename="Max-Mueller-Click-Capybara.vcf"
+  Cache-Control: public, max-age=3600
