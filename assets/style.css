@@ -162,3 +162,9 @@ footer a:hover { color: var(--leise); }
   .marke .caret { animation: none; }
   .knopf { transition: none; }
 }
+
+/* Vorschau-Übersicht (nur Testadressen) */
+.testliste { margin: 28px 0 8px; padding: 18px; border: 1px dashed var(--gelb); border-radius: var(--radius); }
+.testliste h2 { font-size: 1.3rem; margin: 4px 0 6px; }
+.testliste .knopf { margin-top: 10px; }
+.testliste .vorzeile { margin-bottom: 0; }
