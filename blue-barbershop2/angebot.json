@@ -1,0 +1,32 @@
+{
+  "kunde": "Blue Barbershop Düsseldorf",
+  "button": "Angebot & Preise",
+  "vorzeile": "Sonderangebot",
+  "titel": "Diese Website für Blue Barbershop Düsseldorf",
+  "loesungen": [
+    "Der One-Pager aus dieser Vorschau, im hellen Design mit euren Logo-Farben gebaut — schnell, fürs Handy optimiert, ohne Baukasten-Abo",
+    "Online-Terminbuchung mit Wahl des Barbers und Bestätigung per E-Mail, läuft über euren Google Workspace",
+    "Euer Google-Unternehmensprofil einmal komplett überarbeitet: Infos, Leistungen, Öffnungszeiten und Buchungslink",
+    "Eigene E-Mail-Adresse mit eurer Domain, über Gmail im Google Workspace",
+    "Impressum, Datenschutz und Cookie-Hinweis inklusive",
+    "Gehört euch: keine monatlichen Kosten bei mir"
+  ],
+  "preise": [
+    {
+      "name": "Website (One-Pager)",
+      "preis": "750 €",
+      "hinweis": "einmalig · Sonderpreis inkl. Terminbuchung und Überarbeitung des Google-Unternehmensprofils"
+    },
+    {
+      "name": "Google Workspace (1 Person)",
+      "preis": "6,80 € / Monat",
+      "hinweis": "zahlt ihr direkt an Google (Jahresvertrag) · E-Mail über Gmail, Kalender und Buchungstool"
+    },
+    {
+      "name": "Domain",
+      "preis": "ab ca. 1 € / Monat",
+      "hinweis": "zahlt ihr direkt beim Anbieter · wird mit eurem Google Workspace verbunden"
+    }
+  ],
+  "fussnote": "Alle Preise zzgl. gesetzlicher Umsatzsteuer, soweit sie anfällt."
+}
