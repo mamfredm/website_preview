@@ -29,19 +29,25 @@ jobs:
             });
 
             const gemeinsam = ['assets', '_headers', 'index.html', '404.html', 'kontakt.vcf', '.github', 'README.md', 'neuer-kunde.sh', 'kontaktkarten.sh'];
-            const kunden = new Set();
+            const kunden = new Map(); // Kunde → Set der Varianten (website, website-2 …)
             let allgemein = false;
             for (const f of dateien) {
               const teile = f.filename.split('/');
-              if (teile.length > 1 && !gemeinsam.includes(teile[0])) kunden.add(teile[0]);
-              else if (!['.github', 'README.md'].includes(teile[0])) allgemein = true;
+              if (teile.length > 1 && !gemeinsam.includes(teile[0])) {
+                if (!kunden.has(teile[0])) kunden.set(teile[0], new Set());
+                if (/^website(-\d+)?$/.test(teile[1]) && teile.length > 2) kunden.get(teile[0]).add(teile[1]);
+              }
+              else if (!['.github', 'README.md', '_redirects'].includes(teile[0])) allgemein = true;
             }
 
             let text = '<!-- vorschau-links -->\n### 🔗 Vorschau-Links\n\n';
             if (kunden.size) {
               text += '| Kunde | Zwischenseite | Website |\n|---|---|---|\n';
-              for (const k of [...kunden].sort()) {
-                text += `| **${k}** | [${k}/](${basis}/${k}/) | [${k}/website/](${basis}/${k}/website/) |\n`;
+              for (const k of [...kunden.keys()].sort()) {
+                const varianten = [...kunden.get(k)].sort();
+                if (!varianten.length) varianten.push('website');
+                const links = varianten.map(v => `[${k}/${v}/](${basis}/${k}/${v}/)`).join(' · ');
+                text += `| **${k}** | [${k}/](${basis}/${k}/) | ${links} |\n`;
               }
             } else {
               text += 'In diesem PR wurde kein Kundenordner geändert.\n';

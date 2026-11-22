@@ -1,0 +1,5 @@
+# Alte Adressen weiterleiten, damit beschriebene NFC-Tags und verschickte Links weiter funktionieren.
+# Blue Barbershop: zweite Variante liegt jetzt unter /blue-barbershop/website-2/
+/blue-barbershop2/website/*  /blue-barbershop/website-2/:splat  301
+/blue-barbershop2/*          /blue-barbershop/                  301
+/blue-barbershop2            /blue-barbershop/                  301

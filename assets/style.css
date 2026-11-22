@@ -126,6 +126,7 @@ h1 .name { color: var(--gelb); }
   box-shadow: 0 10px 30px -10px rgba(252, 186, 1, 0.55);
 }
 .knopf-haupt:hover { background: #ffc828; }
+.knopf-haupt + .knopf-haupt { margin-top: 12px; } /* zweite Variante */
 
 .knopf-neben {
   margin-top: 12px;
