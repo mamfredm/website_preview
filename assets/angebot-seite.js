@@ -36,7 +36,7 @@
 
     var html = '';
     html += '<section class="a-kopf">' +
-      '<p class="vorzeile">Angebot · gültig bis ' + esc(d.gueltigBis) + '</p>' +
+      '<p class="vorzeile">Angebot' + (d.datum ? ' vom ' + esc(d.datum) : '') + ' · gültig bis ' + esc(d.gueltigBis) + '</p>' +
       '<h1>' + esc(d.titel) + ' <span class="name">für ' + esc(d.kurzname) + '</span></h1>' +
       '<p class="einleitung">' + esc(d.einleitung) + '</p>' +
       '</section>';
