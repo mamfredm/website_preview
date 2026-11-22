@@ -264,7 +264,22 @@
     "Für die Umstellung bei Netcup brauche ich einmal euren Zugang. Das machen wir gemeinsam in einem kurzen Termin.",
     "Zeitplan: Umzug bis spätestens 24.11.2026, damit die Stellenseite zum 01.12.2026 direkt auf Cloudflare live gehen kann. Nach der Umstellung kann es bis zu 48 Stunden dauern, bis die Änderung überall angekommen ist."
   ],
-  "fussnote": "Alle Preise zzgl. gesetzlicher Umsatzsteuer, soweit sie anfällt. Verbindlich sind die Angebote mit den genannten Angebotsnummern.",
+  "fussnote": "Gemäß § 19 UStG wird keine Umsatzsteuer berechnet. Verbindlich sind die Angebote mit den genannten Angebotsnummern.",
   "rabattName": "Freundschaftsrabatt",
-  "email": "hello@click-capybara.com"
+  "email": "hello@click-capybara.com",
+  "downloads": [
+    {
+      "name": "AN-2026-001 · Stellenseite mit Google-Workspace-Formular",
+      "url": "https://docs.google.com/document/d/1iG9F6Oa3TP8B-g7acbrCbRgCG9Lk16jitLLpWR8cw_U/export?format=pdf"
+    },
+    {
+      "name": "AN-2026-002 · Stellenseite mit Tally-Formular",
+      "url": "https://docs.google.com/document/d/1Zzt5LpXcmiJ6VkSZWUSmyu9c1RZxuM7yXP2o9UGE5H0/export?format=pdf"
+    },
+    {
+      "name": "AN-2026-003 · Umzug zu Cloudflare",
+      "url": "https://docs.google.com/document/d/1y1cKu7kVUpqdLtIjpZOd8tZAO0PLxAsfvf0Rsdn0s78/export?format=pdf"
+    }
+  ],
+  "downloadHinweis": "Öffnet sich über Google Drive. Freigegeben für eure E-Mail-Adressen."
 }
