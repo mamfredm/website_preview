@@ -62,6 +62,17 @@ fertige Mail mit Auswahl und Gesamtpreis.
 - Für fremde Kunden einen schwer zu erratenden Ordnernamen nehmen (z. B. `angebot-7k3f/`),
   da jeder mit dem Link die Preise sieht.
 
+## Bestandskunden (Website gibt es schon)
+
+Die Zwischenseite nicht mit „Das könnte die neue Website … sein“ und „Vorschau ansehen“
+lassen, sondern wie bei `tun-sein-ergotherapie/index.html`:
+
+- Überschrift: „Der nächste Schritt für <Kundenname>.“ (Name in `<span class="name">`)
+- Einleitung: ein Satz, was im Angebot steckt
+- Hauptknopf „Angebot ansehen“, darunter „Eure aktuelle Website“ mit Link auf die
+  Live-Domain, dann „Max als Kontakt speichern“ (Untertitel „Name, E-Mail und Website“)
+Den Ordner `website/` trotzdem behalten (die Kontaktkarten-Skripte erkennen Kunden daran).
+
 ## Kontaktkarten
 
 `./kontaktkarten.sh` erzeugt alle Karten neu: die allgemeine `kontakt.vcf`
