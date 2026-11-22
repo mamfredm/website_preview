@@ -28,7 +28,7 @@ jobs:
               owner: context.repo.owner, repo: context.repo.repo, pull_number: pr.number, per_page: 100
             });
 
-            const gemeinsam = ['assets', '_headers', 'index.html', '404.html', 'kontakt.vcf', '.github', 'README.md', 'neuer-kunde.sh', 'kontaktkarten.sh'];
+            const gemeinsam = ['assets', '_headers', 'index.html', '404.html', 'kontakt.vcf', '.github', 'README.md', 'neuer-kunde.sh', 'neue-variante.sh', 'kontaktkarten.sh', 'build.sh', '_redirects'];
             const kunden = new Map(); // Kunde → Set der Varianten (website, website-2 …)
             let allgemein = false;
             for (const f of dateien) {
@@ -40,15 +40,33 @@ jobs:
               else if (!['.github', 'README.md', '_redirects'].includes(teile[0])) allgemein = true;
             }
 
+            // Alle Varianten (website, website-N) und Angebotsseiten (angebot*) des Kunden
+            // im PR-Stand auflisten, nicht nur die geänderten (✏️ = in diesem PR geändert)
+            const alleUnterseiten = async (k) => {
+              try {
+                const { data } = await github.rest.repos.getContent({
+                  owner: context.repo.owner, repo: context.repo.repo, path: k, ref: pr.head.sha
+                });
+                return data.filter(e => e.type === 'dir' && /^(website(-\d+)?|angebot[\w-]*)$/.test(e.name)).map(e => e.name);
+              } catch (e) { return []; } // Ordner im PR gelöscht
+            };
+            const sortierung = (a, b) => {
+              const rang = v => v === 'website' ? [0, 1] : v.startsWith('website-') ? [0, +v.slice(8)] : [1, 0];
+              const [ra, rb] = [rang(a), rang(b)];
+              return ra[0] - rb[0] || ra[1] - rb[1] || a.localeCompare(b);
+            };
+
             let text = '<!-- vorschau-links -->\n### 🔗 Vorschau-Links\n\n';
             if (kunden.size) {
-              text += '| Kunde | Zwischenseite | Website |\n|---|---|---|\n';
+              text += '| Kunde | Zwischenseite | Varianten & Angebot |\n|---|---|---|\n';
               for (const k of [...kunden.keys()].sort()) {
-                const varianten = [...kunden.get(k)].sort();
-                if (!varianten.length) varianten.push('website');
-                const links = varianten.map(v => `[${k}/${v}/](${basis}/${k}/${v}/)`).join(' · ');
+                const geaendert = kunden.get(k);
+                const alle = new Set([...(await alleUnterseiten(k)), ...geaendert]);
+                const links = [...alle].sort(sortierung)
+                  .map(v => `${geaendert.has(v) ? '✏️ ' : ''}[${k}/${v}/](${basis}/${k}/${v}/)`).join(' · ') || '–';
                 text += `| **${k}** | [${k}/](${basis}/${k}/) | ${links} |\n`;
               }
+              text += '\n✏️ = in diesem PR geändert. Bitte alle Varianten der Kunden prüfen, nicht nur die geänderten.\n';
             } else {
               text += 'In diesem PR wurde kein Kundenordner geändert.\n';
             }
