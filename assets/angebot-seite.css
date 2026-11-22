@@ -201,6 +201,25 @@ details[open] summary::after { content: " －"; }
 .a-gesamt small { display: block; font-weight: 400; color: var(--leise); font-size: 0.82rem; }
 .a-gesamt b { font: 800 2rem/1 "Space Grotesk", system-ui, sans-serif; color: var(--gelb); }
 
+.a-downloads { margin-top: 28px; }
+.a-downloads ul { list-style: none; }
+.a-downloads a {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 13px 16px;
+  margin-top: 8px;
+  border: 1px solid var(--linie);
+  border-radius: 12px;
+  background: var(--flaeche);
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+.a-downloads a:hover { border-color: var(--gelb); }
+.a-downloads .pfeil { color: var(--gelb); }
+
 .a-hinweise { margin-top: 28px; font-size: 0.9rem; }
 .a-hinweise ul { margin: 10px 0 0 18px; color: var(--leise); }
 .a-hinweise li { margin-top: 6px; }

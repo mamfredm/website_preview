@@ -82,6 +82,13 @@
 
     html += '<section class="a-summe" aria-live="polite"></section>';
 
+    if (d.downloads && d.downloads.length) {
+      html += '<section class="a-downloads"><p class="a-label">Die Angebote als PDF</p><ul>' +
+        d.downloads.map(function (f) {
+          return '<li><a href="' + esc(f.url || f.datei) + '"' + (f.url ? ' target="_blank" rel="noopener"' : ' download') + '><span>' + esc(f.name) + '</span><span class="pfeil" aria-hidden="true">↓</span></a></li>';
+        }).join('') + '</ul><p class="a-klein">' + esc(d.downloadHinweis || 'Verbindlich sind diese Angebote. Die Seite hier erklärt sie.') + '</p></section>';
+    }
+
     if (d.hinweise) {
       html += '<details class="a-hinweise"><summary>Hinweise zum Angebot</summary><ul>' +
         d.hinweise.map(function (h) { return '<li>' + esc(h) + '</li>'; }).join('') + '</ul></details>';

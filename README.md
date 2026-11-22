@@ -54,7 +54,11 @@ fertige Mail mit Auswahl und Gesamtpreis.
 - Gruppen-Typen: `fest` (immer dabei), `wahl` (genau eine Option), `option` (an/aus)
 - `empfohlen: true` markiert Optionen, `empfehlung.auswahl` ist die Vorauswahl
 - `rabatte[].wenn`: Rabatt gilt, wenn alle genannten Options-IDs gewählt sind
-- Verbindlich bleibt das PDF-Angebot mit Angebotsnummer; die Seite erklärt es.
+- Verbindlich bleibt das PDF-Angebot mit Angebotsnummer; die Seite erklärt es. Die PDFs
+  NICHT ins Repo legen (öffentlich auf GitHub, enthalten Kundendaten). Stattdessen in
+  `downloads` den Export-Link des Google Docs eintragen
+  (`https://docs.google.com/document/d/<ID>/export?format=pdf`) und das Doc nur für die
+  Kunden-E-Mail freigeben (Kunden ohne Google-Konto: „Jeder mit dem Link“).
 - Für fremde Kunden einen schwer zu erratenden Ordnernamen nehmen (z. B. `angebot-7k3f/`),
   da jeder mit dem Link die Preise sieht.
 
