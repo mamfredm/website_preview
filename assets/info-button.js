@@ -2,7 +2,8 @@
  * Click-Capybara Info-Button für Website-Vorschauen
  * Einbinden in der Vorschau (website/index.html), vor </body>:
  *   <script src="/assets/info-button.js" defer></script>
- * Inhalt kommt aus /<kunde>/angebot.json.
+ * Inhalt kommt aus /<kunde>/angebot.json (bei Varianten website-2/ usw. zuerst
+ * aus /<kunde>/angebot-website-2.json).
  * Läuft nur auf preview.click-capybara.com, *.pages.dev und localhost –
  * auf der späteren Live-Domain des Kunden passiert nichts.
  */
@@ -13,11 +14,19 @@
                 host === 'localhost' || host === '127.0.0.1';
   if (!erlaubt) return;
 
-  var kunde = location.pathname.split('/').filter(Boolean)[0];
+  var teile = location.pathname.split('/').filter(Boolean);
+  var kunde = teile[0];
   if (!kunde) return;
+  // Zweite/dritte Variante (website-2/, website-3/ …): eigenes Angebot in
+  // /<kunde>/angebot-website-2.json, sonst das gemeinsame /<kunde>/angebot.json
+  var variante = /^website-\d+$/.test(teile[1] || '') ? teile[1] : '';
+  var holen = function (datei) {
+    return fetch('/' + kunde + '/' + datei, { cache: 'no-cache' })
+      .then(function (r) { if (!r.ok) throw 0; return r; });
+  };
 
-  fetch('/' + kunde + '/angebot.json', { cache: 'no-cache' })
-    .then(function (r) { if (!r.ok) throw 0; return r.json(); })
+  (variante ? holen('angebot-' + variante + '.json').catch(function () { return holen('angebot.json'); })
+            : holen('angebot.json'))
     .then(function (a) { baue(a); })
     .catch(function () { /* kein Angebot hinterlegt → kein Button */ });
 
