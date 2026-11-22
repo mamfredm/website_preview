@@ -49,6 +49,7 @@ pro Baustein aufklappbar, welche Arbeit drinsteckt. „Angebot annehmen“ öffn
 fertige Mail mit Auswahl und Gesamtpreis.
 
 - Seite: `<kunde>/angebot/index.html` (von `tun-sein-ergotherapie/angebot/` kopieren)
+- Auf der Zwischenseite `<kunde>/index.html` einen Knopf „Angebot ansehen“ mit `href="angebot/"` ergänzen
 - Inhalt: `<kunde>/angebot/daten.json`, Darstellung: `assets/angebot-seite.js` + `.css`
 - Gruppen-Typen: `fest` (immer dabei), `wahl` (genau eine Option), `option` (an/aus)
 - `empfohlen: true` markiert Optionen, `empfehlung.auswahl` ist die Vorauswahl

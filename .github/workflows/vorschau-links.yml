@@ -35,7 +35,7 @@ jobs:
               const teile = f.filename.split('/');
               if (teile.length > 1 && !gemeinsam.includes(teile[0])) {
                 if (!kunden.has(teile[0])) kunden.set(teile[0], new Set());
-                if (/^website(-\d+)?$/.test(teile[1]) && teile.length > 2) kunden.get(teile[0]).add(teile[1]);
+                if (/^(website(-\d+)?|angebot[\w-]*)$/.test(teile[1]) && teile.length > 2) kunden.get(teile[0]).add(teile[1]);
               }
               else if (!['.github', 'README.md', '_redirects'].includes(teile[0])) allgemein = true;
             }
