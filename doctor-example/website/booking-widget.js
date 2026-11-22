@@ -190,16 +190,24 @@
 
   /* ───────── mock backend for demos ───────── */
   // Praxis-Sprechzeiten laut Sprechzeiten-Tabelle in index.html: 0=So … 6=Sa,
-  // Liste von [offen, geschlossen]-Stunden (null = geschlossen).
+  // Liste von [offen, geschlossen] als echte Uhrzeiten 'HH:MM' (null = geschlossen).
   var PRACTICE_HOURS = {
-    0: null,                              // Sonntag
-    1: [[8, 14]],                         // Montag
-    2: [[8, 14]],                         // Dienstag
-    3: [[8, 13]],                         // Mittwoch
-    4: [[8, 14], [16, 18]],               // Donnerstag
-    5: [[8, 13]],                         // Freitag
-    6: null                               // Samstag
+    0: null,                                        // Sonntag
+    1: [['08:30', '14:00']],                        // Montag
+    2: [['08:30', '14:00']],                        // Dienstag
+    3: [['08:30', '12:30']],                        // Mittwoch
+    4: [['08:30', '14:00'], ['16:00', '18:00']],    // Donnerstag
+    5: [['08:30', '13:00']],                        // Freitag
+    6: null                                         // Samstag
   };
+
+  function toMin(hhmm) {
+    var p = hhmm.split(':');
+    return parseInt(p[0], 10) * 60 + parseInt(p[1], 10);
+  }
+  function toHHMM(mins) {
+    return String(Math.floor(mins / 60)).padStart(2, '0') + ':' + String(mins % 60).padStart(2, '0');
+  }
 
   function mockApi(action, params) {
     return new Promise(function (res) {
@@ -208,9 +216,7 @@
           var hours = {};
           Object.keys(PRACTICE_HOURS).forEach(function (d) {
             var ranges = PRACTICE_HOURS[d];
-            hours[d] = ranges ? ranges.map(function (r) {
-              return String(r[0]).padStart(2, '0') + ':30-' + String(r[1]).padStart(2, '0') + ':' + (r[1] === 18 ? '00' : '30');
-            }) : [];
+            hours[d] = ranges ? ranges.map(function (r) { return r[0] + '-' + r[1]; }) : [];
           });
           res({
             businessName: 'Hausarztpraxis Doulgeridis',
@@ -230,9 +236,10 @@
           if (!ranges) return res({ slots: [] }); // Praxis geschlossen
           var all = [];
           // 20-Minuten-Takt, passend zu kurzen hausärztlichen Anliegen
+          var SLOT = 20;
           ranges.forEach(function (r) {
-            for (var m = r[0] * 60 + 30; m < r[1] * 60 + (r[1] === 18 ? 0 : 30); m += 20) {
-              all.push(String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0'));
+            for (var m = toMin(r[0]); m + SLOT <= toMin(r[1]); m += SLOT) {
+              all.push(toHHMM(m));
             }
           });
           // pseudo-random availability per date, purely for demo realism
