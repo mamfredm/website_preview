@@ -1,0 +1,214 @@
+/* Click-Capybara – Angebotsseite (/<kunde>/angebot/). Baut auf style.css auf. */
+
+.angebot-seite main,
+.angebot-seite footer { max-width: 680px; }
+
+h2 {
+  font: 700 1.25rem/1.25 "Space Grotesk", system-ui, sans-serif;
+  letter-spacing: -0.01em;
+  margin: 0 0 12px;
+}
+
+.a-kopf { padding: 40px 0 8px; }
+.a-kopf h1 { font-size: clamp(1.8rem, 6.5vw, 2.4rem); }
+.a-kopf h1 .name { display: block; }
+
+.a-label {
+  color: var(--gelb);
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.a-klein { color: var(--leise); font-size: 0.82rem; margin-top: 10px; }
+
+/* Empfehlung */
+.a-empfehlung {
+  margin: 24px 0 8px;
+  padding: 18px 20px;
+  border: 1px solid var(--gelb);
+  border-radius: var(--radius);
+  background: rgba(252, 186, 1, 0.07);
+}
+.a-mini {
+  margin-top: 12px;
+  font: inherit;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #111;
+  background: var(--gelb);
+  border: 0;
+  border-radius: 999px;
+  padding: 9px 16px;
+  cursor: pointer;
+}
+
+/* Gruppen und Karten */
+.a-gruppe { margin-top: 36px; }
+.a-karte {
+  border: 1px solid var(--linie);
+  border-radius: var(--radius);
+  background: var(--flaeche);
+  padding: 16px 18px;
+  margin-bottom: 12px;
+  transition: border-color 0.15s ease, opacity 0.15s ease;
+}
+.a-karte:not(.aktiv) { opacity: 0.72; }
+.a-karte.aktiv { border-color: var(--gelb); }
+
+.a-kopfzeile {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 12px;
+  align-items: start;
+  cursor: pointer;
+}
+.a-kopfzeile input {
+  width: 22px;
+  height: 22px;
+  margin-top: 2px;
+  accent-color: var(--gelb);
+  cursor: pointer;
+}
+.a-fest { color: var(--gelb); font-weight: 800; width: 22px; text-align: center; }
+.a-name { font-weight: 700; font-size: 1.02rem; }
+.a-name small { display: block; font-weight: 400; color: var(--leise); font-size: 0.9rem; margin-top: 4px; }
+.a-badge {
+  display: inline-block;
+  font-style: normal;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #111;
+  background: var(--gelb);
+  border-radius: 999px;
+  padding: 2px 8px;
+  margin-left: 4px;
+  vertical-align: 2px;
+}
+.a-badge.leise { background: var(--linie); color: var(--leise); }
+.a-preis { text-align: right; white-space: nowrap; }
+.a-preis s { display: block; color: #777; font-size: 0.82rem; }
+.a-preis b { font-size: 1.15rem; }
+
+.a-liste { list-style: none; margin: 12px 0 0 34px; font-size: 0.92rem; }
+.a-liste li { position: relative; padding-left: 20px; margin-top: 5px; }
+.a-liste.plus li::before { content: "✓"; position: absolute; left: 0; color: var(--gelb); font-weight: 800; }
+.a-liste.minus li { color: var(--leise); }
+.a-liste.minus li::before { content: "–"; position: absolute; left: 2px; color: #888; }
+
+/* Aufklapper */
+details summary {
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none;
+}
+details summary::-webkit-details-marker { display: none; }
+details summary::after { content: " ＋"; color: var(--gelb); }
+details[open] summary::after { content: " －"; }
+
+.a-aufwand { margin: 14px 0 0 34px; font-size: 0.9rem; }
+.a-aufwand summary { color: var(--gelb); }
+.a-aufwand table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+.a-aufwand td { padding: 9px 0; border-top: 1px solid var(--linie); vertical-align: top; }
+.a-aufwand td span { display: block; color: var(--leise); font-size: 0.85rem; }
+.a-aufwand td:last-child { text-align: right; white-space: nowrap; padding-left: 12px; font-weight: 600; }
+
+/* Vergleich */
+.a-vergleich {
+  margin: 4px 0 0;
+  padding: 14px 18px;
+  border: 1px dashed var(--linie);
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+}
+.a-scroll { overflow-x: auto; margin-top: 12px; }
+.a-vergleich table { border-collapse: collapse; min-width: 520px; width: 100%; }
+.a-vergleich th, .a-vergleich td { text-align: left; vertical-align: top; padding: 9px 10px 9px 0; border-top: 1px solid var(--linie); }
+.a-vergleich thead th { border-top: 0; font-size: 0.8rem; color: var(--leise); text-transform: uppercase; letter-spacing: 0.06em; }
+.a-vergleich tbody th { font-weight: 600; width: 28%; }
+.a-vergleich td { color: var(--leise); }
+.a-vergleich .hervor { color: var(--text); }
+.a-vergleich thead .hervor { color: var(--gelb); }
+
+/* Ablauf mit Vorschau */
+.a-ablauf {
+  margin-top: 16px;
+  padding: 20px;
+  border-radius: var(--radius);
+  background: linear-gradient(160deg, rgba(252, 186, 1, 0.10), rgba(252, 186, 1, 0.02));
+  border: 1px solid rgba(252, 186, 1, 0.35);
+}
+.a-ablauf .einleitung { font-size: 0.95rem; margin-bottom: 14px; }
+.a-ablauf ol { list-style: none; counter-reset: schritt; }
+.a-ablauf li {
+  counter-increment: schritt;
+  position: relative;
+  padding: 0 0 16px 46px;
+}
+.a-ablauf li::before {
+  content: counter(schritt);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  color: #111;
+  background: var(--gelb);
+}
+.a-ablauf li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 14px;
+  top: 32px;
+  bottom: 2px;
+  width: 2px;
+  background: rgba(252, 186, 1, 0.35);
+}
+.a-ablauf li b { display: block; }
+.a-ablauf li span { color: var(--leise); font-size: 0.92rem; }
+
+/* Summe */
+.a-summe {
+  margin-top: 40px;
+  padding: 20px;
+  border-radius: var(--radius);
+  background: var(--flaeche);
+  border: 1px solid var(--linie);
+}
+.a-posten { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+.a-posten td { padding: 8px 0; border-top: 1px solid var(--linie); vertical-align: top; }
+.a-posten tr:first-child td { border-top: 0; }
+.a-posten td:last-child { text-align: right; white-space: nowrap; padding-left: 12px; }
+.a-posten small { display: block; color: var(--leise); font-size: 0.8rem; }
+.a-posten .rabatt td:last-child { color: var(--gelb); }
+.a-gesamt {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 12px;
+  margin: 14px 0 18px;
+  padding-top: 14px;
+  border-top: 2px solid var(--gelb);
+}
+.a-gesamt span { font-weight: 700; }
+.a-gesamt small { display: block; font-weight: 400; color: var(--leise); font-size: 0.82rem; }
+.a-gesamt b { font: 800 2rem/1 "Space Grotesk", system-ui, sans-serif; color: var(--gelb); }
+
+.a-hinweise { margin-top: 28px; font-size: 0.9rem; }
+.a-hinweise ul { margin: 10px 0 0 18px; color: var(--leise); }
+.a-hinweise li { margin-top: 6px; }
+.a-fuss { margin-bottom: 8px; }
+
+@media (max-width: 480px) {
+  .a-kopfzeile { grid-template-columns: auto 1fr; }
+  .a-preis { grid-column: 2; text-align: left; }
+  .a-preis s { display: inline; margin-right: 8px; }
+  .a-liste, .a-aufwand { margin-left: 0; }
+}

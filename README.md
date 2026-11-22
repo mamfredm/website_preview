@@ -42,6 +42,22 @@ blue-barbershop/
 Keinen zweiten Kundenordner (`kunde2`) anlegen. Alte Adressen, die schon verteilt
 wurden, in `_redirects` auf den neuen Ort umleiten.
 
+## Angebotsseite (`/<kunde>/angebot/`)
+
+Interaktives Angebot statt nur PDF: Bausteine auswählen, Preis rechnet live mit,
+pro Baustein aufklappbar, welche Arbeit drinsteckt. „Angebot annehmen“ öffnet eine
+fertige Mail mit Auswahl und Gesamtpreis.
+
+- Seite: `<kunde>/angebot/index.html` (von `tun-sein-ergotherapie/angebot/` kopieren)
+- Auf der Zwischenseite `<kunde>/index.html` einen Knopf „Angebot ansehen“ mit `href="angebot/"` ergänzen
+- Inhalt: `<kunde>/angebot/daten.json`, Darstellung: `assets/angebot-seite.js` + `.css`
+- Gruppen-Typen: `fest` (immer dabei), `wahl` (genau eine Option), `option` (an/aus)
+- `empfohlen: true` markiert Optionen, `empfehlung.auswahl` ist die Vorauswahl
+- `rabatte[].wenn`: Rabatt gilt, wenn alle genannten Options-IDs gewählt sind
+- Verbindlich bleibt das PDF-Angebot mit Angebotsnummer; die Seite erklärt es.
+- Für fremde Kunden einen schwer zu erratenden Ordnernamen nehmen (z. B. `angebot-7k3f/`),
+  da jeder mit dem Link die Preise sieht.
+
 ## Kontaktkarten
 
 `./kontaktkarten.sh` erzeugt alle Karten neu: die allgemeine `kontakt.vcf`

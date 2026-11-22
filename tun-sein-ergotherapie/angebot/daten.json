@@ -1,0 +1,270 @@
+{
+  "kunde": "Praxis Tun & Sein – Ergotherapie",
+  "kurzname": "Tun & Sein",
+  "datum": "20.11.2026",
+  "gueltigBis": "18.12.2026",
+  "titel": "Stellenseite mit Bewerbungsformular und Umzug zu Cloudflare",
+  "einleitung": "Hier seht ihr alle drei Angebote auf einer Seite. Wählt die Bausteine aus, der Preis rechnet sich direkt mit. Bei jedem Baustein könnt ihr aufklappen, welche Arbeit drinsteckt.",
+  "empfehlung": {
+    "titel": "Meine Empfehlung",
+    "text": "Stellenseite mit dem Bewerbungsformular in eurem Google Workspace, zusammen mit dem Umzug zu Cloudflare. Die Bewerbungen liegen direkt in eurem Google Drive, es kommt kein weiterer Anbieter für Bewerberdaten dazu, und ab dem Umzug bekommt jede Änderung an eurer Website zuerst einen Vorschau-Link, egal wer sie macht.",
+    "auswahl": {
+      "formular": "workspace",
+      "cloudflare": true
+    }
+  },
+  "gruppen": [
+    {
+      "id": "stellenseite",
+      "typ": "fest",
+      "titel": "1. Die Stellenseite",
+      "optionen": [
+        {
+          "id": "stellenseite",
+          "name": "Stellenseite inkl. SEO & Google for Jobs",
+          "angebot": "",
+          "regulaer": 400,
+          "preis": 200,
+          "beschreibung": "Eigene Unterseite im Design eurer Website, damit eure Stelle auch direkt in der Google-Jobsuche erscheint.",
+          "aufwand": [
+            [
+              "Stellenseite aufbauen",
+              "Unterseite im Design der Website, Texte und Bilder einpflegen, Verlinkung in der Navigation",
+              "2–3 h"
+            ],
+            [
+              "SEO & Google for Jobs",
+              "JobPosting-Daten, Meta-Daten, Sitemap, Anmeldung in der Search Console, Prüfung im Rich-Results-Test",
+              "1–2 h"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "formular",
+      "typ": "wahl",
+      "titel": "2. Bewerbungsformular: Wo sollen die Bewerbungen landen?",
+      "optionen": [
+        {
+          "id": "workspace",
+          "name": "Eigenes Formular mit eurem Google Workspace",
+          "angebot": "AN-2026-001",
+          "empfohlen": true,
+          "regulaer": 400,
+          "preis": 220,
+          "beschreibung": "Formular im Look eurer Website. Jede Bewerbung landet als eigener Ordner direkt in eurem Google Drive.",
+          "vorteile": [
+            "Bewerbungen direkt in eurem Google Drive, ein Ordner pro Bewerbung",
+            "Kein weiterer Anbieter: der Vertrag zur Auftragsverarbeitung mit Google besteht schon",
+            "Automatische Löschung nach 6 Monaten",
+            "Formular sieht aus wie der Rest eurer Website",
+            "Keine laufenden Kosten, alles gehört euch"
+          ],
+          "aufwand": [
+            [
+              "Bewerbungsformular",
+              "Formular im Design der Website, Pflichtfelder, Datei-Upload ohne Login",
+              "1,5–2 h"
+            ],
+            [
+              "Apps Script & Google Drive",
+              "Ablage pro Bewerbung, E-Mail-Benachrichtigung, Spamschutz, automatische Löschung nach 6 Monaten, Einrichtung in eurem Workspace",
+              "2–3 h"
+            ],
+            [
+              "Datenschutz-Abschnitt",
+              "Technischer Einbau des Abschnitts zum Bewerbungsverfahren",
+              "0,5–1 h"
+            ],
+            [
+              "Tests & Abstimmung",
+              "Testbewerbungen, Korrekturschleife mit euch, Livegang",
+              "1 h"
+            ]
+          ]
+        },
+        {
+          "id": "tally",
+          "name": "Formular über Tally (eingebettet)",
+          "angebot": "AN-2026-002",
+          "regulaer": 200,
+          "preis": 120,
+          "beschreibung": "Fertiges Formular vom Anbieter Tally, in die Stellenseite eingebettet. Die Unterlagen liegen bei Tally, nicht in eurem Drive.",
+          "nachteile": [
+            "Bewerbungen liegen bei Tally; ins Drive nur über Zusatzdienste wie Zapier oder Make",
+            "Eigener AVV mit Tally und Ergänzung der Datenschutzerklärung nötig",
+            "Löschung nach 6 Monaten müsst ihr selbst erledigen",
+            "Max. 10 MB pro Datei, Design nur eingeschränkt anpassbar"
+          ],
+          "aufwand": [
+            [
+              "Bewerbungsformular",
+              "Formular in Tally anlegen, Pflichtfelder, Datei-Upload, Einbettung in die Stellenseite",
+              "1 h"
+            ],
+            [
+              "Tally-Konto & Benachrichtigung",
+              "Tally-Konto auf die Praxis anlegen, E-Mail-Benachrichtigung einrichten, Hinweise zum AVV mit Tally",
+              "0,5 h"
+            ],
+            [
+              "Datenschutz-Abschnitt",
+              "Technischer Einbau des Abschnitts zum Bewerbungsverfahren",
+              "0,5–1 h"
+            ],
+            [
+              "Tests & Abstimmung",
+              "Testbewerbungen, Korrekturschleife mit euch, Livegang",
+              "0,5 h"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cloudflare",
+      "typ": "option",
+      "titel": "3. Umzug zu Cloudflare (optional)",
+      "optionen": [
+        {
+          "id": "cloudflare",
+          "name": "Umzug der Website zu Cloudflare",
+          "angebot": "AN-2026-003",
+          "empfohlen": true,
+          "regulaer": 350,
+          "preis": 150,
+          "beschreibung": "Eure Website zieht von GitHub Pages zu Cloudflare Pages. Inhalte, Kontaktformular und E-Mail bleiben, wie sie sind.",
+          "vorteile": [
+            "Vorschau vor jedem Livegang: jede Änderung bekommt vorab einen eigenen Link, egal ob ihr sie macht oder ich",
+            "Ihr und ich arbeiten weiter ganz normal in GitHub, am Ablauf ändert sich nichts",
+            "Saubere Adressen ohne .html und bewusste Einstellungen für Bots und KI-Crawler",
+            "Kostenloser Plan, keine laufenden Kosten",
+            "Die Stellenseite geht zum 01.12.2026 direkt auf Cloudflare live"
+          ],
+          "aufwand": [
+            [
+              "Cloudflare-Konto & Pages-Projekt",
+              "Konto auf die Praxis anlegen, mit dem GitHub-Repository verbinden, Build und Vorschau prüfen",
+              "0,75 h"
+            ],
+            [
+              "DNS-Einträge übernehmen",
+              "Alle bestehenden Einträge, vor allem für eure E-Mail (MX, SPF, DKIM, DMARC für Google Workspace)",
+              "0,5–1 h"
+            ],
+            [
+              "Domain umstellen",
+              "Nameserver bei Netcup umstellen, Domain und www aufschalten, SSL-Zertifikat",
+              "0,5 h"
+            ],
+            [
+              "Weiterleitungen & Einstellungen",
+              "301-Weiterleitungen, saubere URLs ohne .html, bewusste Einstellungen für Bots und KI-Crawler",
+              "0,5–0,75 h"
+            ],
+            [
+              "Tests",
+              "Website, Kontaktformular sowie E-Mail-Empfang und -Versand nach der Umstellung",
+              "0,5 h"
+            ],
+            [
+              "Abschluss",
+              "Search Console prüfen, GitHub Pages abschalten, kurze Übergabe an euch",
+              "0,25–0,5 h"
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "rabatte": [
+    {
+      "name": "Kombi-Vorteil",
+      "betrag": 30,
+      "wenn": [
+        "workspace",
+        "cloudflare"
+      ],
+      "beschreibung": "Stellenseite mit Google-Workspace-Formular und Umzug zusammen: eine Testrunde und die zweite Anmeldung bei Google entfallen."
+    }
+  ],
+  "ablauf": {
+    "titel": "Mit Cloudflare: erst ansehen, dann live",
+    "einleitung": "Heute geht jede Änderung an eurer Website sofort live, egal ob ihr sie macht oder ich. Nach dem Umzug bekommt jede Änderung zuerst einen eigenen Vorschau-Link.",
+    "schritte": [
+      [
+        "Jemand ändert etwas an der Website",
+        "Ihr selbst oder ich, wie bisher in GitHub. Gespeichert wird in einem eigenen Branch statt direkt auf der Live-Version. Wie das geht, zeige ich euch bei der Übergabe."
+      ],
+      [
+        "Cloudflare baut automatisch eine Vorschau",
+        "Eure Website mit der Änderung, fertig, aber noch nicht öffentlich, unter einem eigenen Link."
+      ],
+      [
+        "Ihr prüft die Vorschau",
+        "Am Handy oder Computer, in Ruhe. Passt etwas nicht, wird es vorher korrigiert."
+      ],
+      [
+        "Erst dann geht die Änderung live",
+        "Eure Besucher sehen nur die fertige Version, Tippfehler und kaputte Bilder bleiben in der Vorschau."
+      ]
+    ]
+  },
+  "vergleich": {
+    "titel": "Google Workspace oder Tally im Vergleich",
+    "spalten": [
+      "",
+      "Google Workspace",
+      "Tally"
+    ],
+    "zeilen": [
+      [
+        "Wo landen die Bewerbungen?",
+        "Direkt in eurem Google Drive, ein Ordner pro Bewerbung",
+        "Bei Tally. Ins Drive nur über Zapier oder Make"
+      ],
+      [
+        "Datenschutz",
+        "Läuft in eurem Google Workspace, der AVV mit Google besteht schon",
+        "Weiterer Anbieter für Bewerberdaten: eigener AVV mit Tally nötig"
+      ],
+      [
+        "Löschung nach 6 Monaten",
+        "Automatisch",
+        "Müsst ihr selbst im Tally-Dashboard erledigen"
+      ],
+      [
+        "Design",
+        "Formular im Look eurer Website",
+        "Eingebettetes Tally-Formular, Tally-Hinweis im kostenlosen Plan"
+      ],
+      [
+        "Dateigröße",
+        "Grenze legen wir selbst fest",
+        "Max. 10 MB pro Datei, mehr nur mit Tally-Abo"
+      ],
+      [
+        "Laufende Kosten",
+        "Keine",
+        "Keine im kostenlosen Plan, Zusatzdienste kosten extra"
+      ],
+      [
+        "Abhängigkeit",
+        "Alles gehört euch und läuft in eurem Konto",
+        "Funktionen, Preise und Bedingungen legt Tally fest"
+      ]
+    ]
+  },
+  "hinweise": [
+    "Texte, Gehaltsangaben und Fotos für die Stellenseite liefert die Praxis.",
+    "Den Rechtstext der Datenschutzerklärung verantwortet die Praxis. Ich baue den Abschnitt zum Bewerbungsverfahren technisch auf der Website ein.",
+    "Spätere Änderungen an der Stellenseite (anpassen, offline nehmen, neue Stelle): 40 € pauschal pro Änderung. Die erste Änderung ist inklusive.",
+    "Cloudflare: Die Domain bleibt bei Netcup registriert, nur die Verwaltung der DNS-Einträge zieht um. Das Konto wird auf die Praxis angelegt, ich bekomme Zugriff als Mitglied.",
+    "Für die Umstellung bei Netcup brauche ich einmal euren Zugang. Das machen wir gemeinsam in einem kurzen Termin.",
+    "Zeitplan: Umzug bis spätestens 24.11.2026, damit die Stellenseite zum 01.12.2026 direkt auf Cloudflare live gehen kann. Nach der Umstellung kann es bis zu 48 Stunden dauern, bis die Änderung überall angekommen ist."
+  ],
+  "fussnote": "Alle Preise zzgl. gesetzlicher Umsatzsteuer, soweit sie anfällt. Verbindlich sind die Angebote mit den genannten Angebotsnummern.",
+  "rabattName": "Freundschaftsrabatt",
+  "email": "hello@click-capybara.com"
+}
