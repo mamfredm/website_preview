@@ -32,12 +32,32 @@ blue-barbershop/
 └── angebot-website-2.json      optional: eigenes Angebot für Variante 2
 ```
 
-1. Zweite Vorschau nach `<kunde>/website-2/` legen (Pfade relativ halten).
+```bash
+./neue-variante.sh blue-barbershop "Helles Design in euren Logo-Farben" --von website --erste "Dunkles Design"
+```
+
+Das Skript legt den nächsten freien Ordner `website-N/` an (mit `--von <ordner>` als Kopie
+einer bestehenden Variante, sonst aus `muster/website`), setzt auf der Zwischenseite einen
+Knopf „Variante N ansehen“ ein (immer vor „Angebot ansehen“), passt die Einleitung
+(„zwei/drei Vorschauen“) und den Kontakt-Knopf („Mit Link zu deinen Vorschauen“) an.
+- `--erste "<Text>"` ist bei der ersten zusätzlichen Variante Pflicht: aus „Vorschau ansehen“
+  wird dann „Variante 1 ansehen“ mit dieser Beschreibung.
+- `--angebot` kopiert `angebot.json` nach `angebot-website-N.json` für ein eigenes Angebot.
+- Beschreibungen kurz und für Laien verständlich („Dunkles Design“, „Helles Design in euren Logo-Farben“).
+- Bei Bestandskunden (Zwischenseite ohne „Vorschau ansehen“) bricht das Skript ab.
+
+Von Hand geht es auch:
+
+1. Zweite Vorschau nach `<kunde>/website-2/` legen (Pfade relativ halten, vor `</body>`
+   `<script src="/assets/info-button.js" defer></script>` einbinden).
 2. In `<kunde>/index.html` den auskommentierten Knopf „Variante 2 ansehen“ aus der
    Vorlage `muster/index.html` übernehmen und die Texte anpassen
    („zwei Vorschauen“, kurze Beschreibung pro Variante).
 3. Soll Variante 2 ein anderes Angebot zeigen: `angebot-website-2.json` anlegen.
    Fehlt die Datei, zeigt der Button das normale `angebot.json`.
+
+Im Pull Request listet der Kommentar „Vorschau-Links“ für jeden geänderten Kunden alle
+Varianten und Angebotsseiten auf (✏️ = geändert).
 
 Keinen zweiten Kundenordner (`kunde2`) anlegen. Alte Adressen, die schon verteilt
 wurden, in `_redirects` auf den neuen Ort umleiten.
@@ -111,11 +131,14 @@ Auf `preview.click-capybara.com` (main) entsteht keine Liste.
 | `/<kunde>/` | Zwischenseite: Vorschau ansehen oder Kontakt speichern |
 | `/<kunde>/website/` | Die eigentliche Vorschau |
 | `/<kunde>/website-2/` | Optional: zweite Variante |
+| `/<kunde>/angebot/` | Optional: interaktive Angebotsseite (`daten.json`) |
 | `_redirects` | Weiterleitungen für umgezogene Vorschau-Adressen |
 | `/` | Allgemeine Seite (Kontakt + click-capybara.com) |
 | `404.html` | Für unbekannte oder gelöschte Vorschauen |
 | `kontakt.vcf` | Allgemeine Kontaktkarte (Startseite, 404) |
 | `/<kunde>/kontakt.vcf` | Kontaktkarte mit Link zur Vorschau des Kunden |
+| `neuer-kunde.sh` | Legt einen neuen Kundenordner an |
+| `neue-variante.sh` | Legt eine weitere Variante im Kundenordner an |
 | `kontaktkarten.sh` | Erzeugt alle Kontaktkarten neu |
 | `/<kunde>/angebot.json` | Inhalt des Angebots-Buttons |
 | `assets/info-button.js` | Angebots-Button für alle Vorschauen |
