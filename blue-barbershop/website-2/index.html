@@ -9,6 +9,12 @@
 
 <link rel="preload" href="assets/fonts/oswald-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" type="image/avif" fetchpriority="high"
+  href="../assets/img/salon/interieur-480w.avif"
+  imagesrcset="../assets/img/salon/interieur-480w.avif 480w,
+               ../assets/img/salon/interieur-960w.avif 960w,
+               ../assets/img/salon/interieur-1440w.avif 1440w"
+  imagesizes="(min-width: 1024px) 34vw, 92vw">
 
 <!--
   Click-Capybara Sandbox — Demo für Blue Barbershop Düsseldorf (Light Mode & Logo-Farben).
@@ -158,10 +164,10 @@ nav.haupt a.aktiv{font-weight:600}
 
 /* Hero-Teaserkarte */
 .teaser{background:#fff;border:1px solid var(--line);border-radius:calc(var(--radius)*2);box-shadow:0 20px 40px -24px rgba(15,23,42,.18);padding:var(--s4)}
-.teaser-bild{height:13rem;border-radius:var(--radius);border:1px solid var(--line);margin-bottom:var(--s3);
-  background:linear-gradient(135deg,var(--blue-soft) 0%, #fff 55%, var(--blue-border) 100%);
-  display:grid;place-items:center;position:relative;overflow:hidden}
-.teaser-bild svg{width:4rem;height:4rem;stroke:var(--blue);opacity:.9}
+.teaser-bild{height:15rem;border-radius:var(--radius);border:1px solid var(--line);margin-bottom:var(--s3);
+  background:var(--blue-soft);position:relative;overflow:hidden}
+.teaser-bild picture{display:block;width:100%;height:100%}
+.teaser-bild img{width:100%;height:100%;object-fit:cover;object-position:50% 50%;display:block}
 .teaser-badge{position:absolute;top:.75rem;right:.75rem;display:inline-flex;align-items:center;gap:.4rem;background:rgba(255,255,255,.92);
   border:1px solid var(--line);border-radius:999px;padding:.25rem .7rem;font-family:var(--display);font-weight:700;font-size:.62rem;text-transform:uppercase;letter-spacing:.05em}
 .teaser-badge i{width:.45rem;height:.45rem;border-radius:50%;background:#10B981}
@@ -227,14 +233,19 @@ section{padding-block:var(--s6)}
 .buch-note{margin-top:var(--s2);color:var(--mut);font-size:.85rem}
 
 /* Team */
+.team-band{margin:0 0 var(--s5);border-radius:calc(var(--radius)*2);overflow:hidden;
+  border:1px solid var(--line);background:var(--blue-soft)}
+.team-band picture{display:block}
+.team-band img{width:100%;height:auto;display:block;aspect-ratio:16/9;object-fit:cover;object-position:50% 26%}
 .team-grid{display:grid;gap:var(--s4)}
 @media(min-width:768px){ .team-grid{grid-template-columns:repeat(3,1fr);gap:var(--s5)} }
 .team-card{background:var(--card);border:1px solid var(--line);border-radius:calc(var(--radius)*2);padding:var(--s4);
   display:flex;flex-direction:column;align-items:center;text-align:center;transition:box-shadow .15s,border-color .15s}
 .team-card:hover{box-shadow:0 12px 28px -18px rgba(15,23,42,.25);border-color:var(--blue-border)}
-.avatar{width:6.5rem;height:6.5rem;border-radius:50%;padding:.25rem;background:linear-gradient(135deg,var(--blue),var(--blue-soft));margin-bottom:var(--s3)}
-.avatar span{width:100%;height:100%;border-radius:50%;background:#fff;color:var(--blue);display:grid;place-items:center;
-  font-family:var(--display);font-weight:700;font-size:2rem}
+.avatar{width:6.5rem;height:6.5rem;border-radius:50%;padding:.25rem;background:linear-gradient(135deg,var(--blue),var(--blue-soft));
+  margin-bottom:var(--s3);flex:none}
+.avatar picture{display:block;width:100%;height:100%}
+.avatar img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;background:#fff}
 .rollen-badge{background:var(--blue-soft);color:var(--blue);border-radius:999px;padding:.2rem .8rem;
   font-family:var(--display);font-weight:700;font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:var(--s2)}
 .team-card h3{font-size:1.25rem}
@@ -257,6 +268,13 @@ section{padding-block:var(--s6)}
 .ort-karte small{color:var(--mut);display:block}
 .karte{width:100%;aspect-ratio:16/9;border:1px solid var(--line);border-radius:calc(var(--radius)*2);margin-top:var(--s3);overflow:hidden;background:var(--blue-soft)}
 .karte iframe{width:100%;height:100%;border:0;display:block}
+
+/* Studio-Galerie (Salon-Impressionen) */
+.studio-strip{display:grid;grid-template-columns:1fr;gap:var(--s3);margin-top:var(--s5)}
+@media(min-width:768px){ .studio-strip{grid-template-columns:1fr 1fr;gap:var(--s4)} }
+.studio-strip figure{margin:0;border-radius:calc(var(--radius)*2);overflow:hidden;border:1px solid var(--line);background:var(--blue-soft)}
+.studio-strip picture{display:block}
+.studio-strip img{display:block;width:100%;height:100%;aspect-ratio:4/3;object-fit:cover}
 
 /* Bewertungen */
 .bew-kopf{display:flex;flex-wrap:wrap;gap:var(--s3);align-items:flex-end;justify-content:space-between;margin-bottom:var(--s5)}
@@ -356,7 +374,19 @@ footer.site ul a:hover{color:var(--blue)}
       </div>
       <div class="teaser">
         <div class="teaser-bild">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M8.1 7.8 20 19.6M8.1 16.2 20 4.4"/></svg>
+          <picture>
+            <source type="image/avif" srcset="../assets/img/salon/interieur-480w.avif 480w,
+                    ../assets/img/salon/interieur-960w.avif 960w,
+                    ../assets/img/salon/interieur-1440w.avif 1440w"
+              sizes="(min-width: 1024px) 34vw, 92vw">
+            <source type="image/webp" srcset="../assets/img/salon/interieur-480w.webp 480w,
+                    ../assets/img/salon/interieur-960w.webp 960w,
+                    ../assets/img/salon/interieur-1440w.webp 1440w"
+              sizes="(min-width: 1024px) 34vw, 92vw">
+            <img src="../assets/img/salon/interieur-960w.webp"
+              alt="Der Salon in der Liebigstraße: Barberstühle vor Spiegeln, Waschplätze und Regale mit Pflegeprodukten"
+              width="960" height="524" fetchpriority="high" decoding="async">
+          </picture>
           <span class="teaser-badge"><i aria-hidden="true"></i>Slots heute frei</span>
         </div>
         <div class="teaser-kopf">
@@ -489,23 +519,56 @@ footer.site ul a:hover{color:var(--blue)}
         <h2>Drei Barber, <span class="accent">ein Standard.</span></h2>
         <p style="margin-inline:auto">Jedes Teammitglied bringt meisterhafte Schnittkunst, Blick für Gesichtsformen und Hingabe für saubere Fade-Übergänge mit.</p>
       </div>
+      <figure class="team-band">
+        <picture>
+          <source type="image/avif" srcset="../assets/img/salon/team-vor-ort-480w.avif 480w,
+                  ../assets/img/salon/team-vor-ort-960w.avif 960w,
+                  ../assets/img/salon/team-vor-ort-1440w.avif 1440w"
+            sizes="(min-width: 1200px) 1200px, 92vw">
+          <source type="image/webp" srcset="../assets/img/salon/team-vor-ort-480w.webp 480w,
+                  ../assets/img/salon/team-vor-ort-960w.webp 960w,
+                  ../assets/img/salon/team-vor-ort-1440w.webp 1440w"
+            sizes="(min-width: 1200px) 1200px, 92vw">
+          <img src="../assets/img/salon/team-vor-ort-960w.webp"
+            alt="Ahmed, Saher und Ali vom Blue Barbershop in hellblauen Shirts und weißen Kitteln mit Logo, Arme verschränkt"
+            width="960" height="540" loading="lazy" decoding="async">
+        </picture>
+      </figure>
       <div class="team-grid">
         <div class="team-card">
-          <div class="avatar" aria-hidden="true"><span>A</span></div>
+          <div class="avatar">
+            <picture>
+              <source type="image/avif" srcset="../assets/img/team/ahmed-208w.avif 208w, ../assets/img/team/ahmed-312w.avif 312w" sizes="104px">
+              <source type="image/webp" srcset="../assets/img/team/ahmed-208w.webp 208w, ../assets/img/team/ahmed-312w.webp 312w" sizes="104px">
+              <img src="../assets/img/team/ahmed-208w.webp" alt="Ahmed, Master Barber, in weißem Kittel mit dem Blue-Barbershop-Logo" width="208" height="208" loading="lazy" decoding="async">
+            </picture>
+          </div>
           <span class="rollen-badge">Master Barber</span>
           <h3>Ahmed</h3>
           <p>Spezialist für klassische Scherentechniken und millimetergenaue Konturen.</p>
           <span class="team-fuss"><span>Erfahrung: 9 Jahre</span><b aria-label="Bewertung 5,0">★ 5.0</b></span>
         </div>
         <div class="team-card">
-          <div class="avatar" aria-hidden="true"><span>S</span></div>
+          <div class="avatar">
+            <picture>
+              <source type="image/avif" srcset="../assets/img/team/saher-208w.avif 208w, ../assets/img/team/saher-312w.avif 312w" sizes="104px">
+              <source type="image/webp" srcset="../assets/img/team/saher-208w.webp 208w, ../assets/img/team/saher-312w.webp 312w" sizes="104px">
+              <img src="../assets/img/team/saher-208w.webp" alt="Saher, Beard Specialist" width="208" height="208" loading="lazy" decoding="async">
+            </picture>
+          </div>
           <span class="rollen-badge">Beard Specialist</span>
           <h3>Saher</h3>
           <p>Experte für Heißwachs, Bartmodellierung und traditionelle Rasiermesser-Rituale.</p>
           <span class="team-fuss"><span>Erfahrung: 7 Jahre</span><b aria-label="Bewertung 5,0">★ 5.0</b></span>
         </div>
         <div class="team-card">
-          <div class="avatar" aria-hidden="true"><span>A</span></div>
+          <div class="avatar">
+            <picture>
+              <source type="image/avif" srcset="../assets/img/team/ali-208w.avif 208w, ../assets/img/team/ali-250w.avif 250w" sizes="104px">
+              <source type="image/webp" srcset="../assets/img/team/ali-208w.webp 208w, ../assets/img/team/ali-250w.webp 250w" sizes="104px">
+              <img src="../assets/img/team/ali-208w.webp" alt="Ali, Skin Fade Expert" width="208" height="208" loading="lazy" decoding="async">
+            </picture>
+          </div>
           <span class="rollen-badge">Skin Fade Expert</span>
           <h3>Ali</h3>
           <p>Perfektierte Taper Fades, Skin Fades und zeitgemäße urbane Männer-Stylings.</p>
@@ -543,6 +606,36 @@ footer.site ul a:hover{color:var(--blue)}
           <iframe title="Karte: Blue Barbershop, Liebigstraße 1a, 40479 Düsseldorf" loading="lazy"
             src="https://maps.google.com/maps?q=Liebigstra%C3%9Fe%201a%2C%2040479%20D%C3%BCsseldorf&amp;output=embed"></iframe>
         </div>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="studio-strip">
+        <figure>
+          <picture>
+            <source type="image/avif" srcset="../assets/img/salon/fade-nacken-480w.avif 480w,
+                    ../assets/img/salon/fade-nacken-960w.avif 960w"
+              sizes="(min-width: 768px) 46vw, 92vw">
+            <source type="image/webp" srcset="../assets/img/salon/fade-nacken-480w.webp 480w,
+                    ../assets/img/salon/fade-nacken-960w.webp 960w"
+              sizes="(min-width: 768px) 46vw, 92vw">
+            <img src="../assets/img/salon/fade-nacken-960w.webp"
+              alt="Frisch geschnittener Fade am Hinterkopf, Nahaufnahme mit sauberem Übergang im Nacken"
+              width="960" height="720" loading="lazy" decoding="async">
+          </picture>
+        </figure>
+        <figure>
+          <picture>
+            <source type="image/avif" srcset="../assets/img/salon/kopfstuetze-480w.avif 480w,
+                    ../assets/img/salon/kopfstuetze-960w.avif 960w"
+              sizes="(min-width: 768px) 46vw, 92vw">
+            <source type="image/webp" srcset="../assets/img/salon/kopfstuetze-480w.webp 480w,
+                    ../assets/img/salon/kopfstuetze-960w.webp 960w"
+              sizes="(min-width: 768px) 46vw, 92vw">
+            <img src="../assets/img/salon/kopfstuetze-960w.webp"
+              alt="Kunde lehnt entspannt mit geschlossenen Augen auf der Kopfstütze des Barberstuhls, während die Konturen gezogen werden"
+              width="960" height="720" loading="lazy" decoding="async">
+          </picture>
+        </figure>
       </div>
     </div>
   </section>
@@ -644,7 +737,11 @@ footer.site ul a:hover{color:var(--blue)}
   1) BOOKING_ENDPOINT unten durch die echte Google-Apps-Script-URL ersetzen (aktuell 'mock').
   2) Die drei Beispielzitate im Abschnitt #bewertungen durch echte, mit Erlaubnis übernommene
      Bewertungen ersetzen (Rating 5,0 / 111 Bewertungen gegen das echte Google-Profil prüfen).
-  3) Fotos vom Laden/Team ergänzen (aktuell Initialen-Platzhalter).
+  3) Fotos: Hero-Teaser, Teamband, Team-Avatare und Studio-Galerie nutzen echte
+     Kundenuploads aus dem Planity-Profil (lokal gehostet unter ../assets/img/,
+     erzeugt mit scripts/optimize-fotos.py). Vor Live-Schaltung Nutzungsrechte
+     bestätigen lassen, bei den Team-Porträts zusätzlich das Einverständnis der
+     abgebildeten Personen.
   4) Impressum/Datenschutz/AGB im Footer verlinken, sobald die Live-Domain feststeht.
 -->
 <script src="booking-widget.js"></script>
