@@ -22,7 +22,15 @@
   var variante = /^website-\d+$/.test(teile[1] || '') ? teile[1] : '';
   var holen = function (datei) {
     return fetch('/' + kunde + '/' + datei, { cache: 'no-cache' })
-      .then(function (r) { if (!r.ok) throw 0; return r; });
+      .then(function (r) {
+        if (!r.ok) throw 0;
+        return r.json(); // Body parsen – kaputtes JSON rejectet hier und läuft in denselben Fallback wie 404
+      })
+      .then(function (a) {
+        // Nur echte Angebots-Objekte durchlassen, sonst lieber kein Button als „Für undefined"
+        if (!a || typeof a !== 'object' || !(a.titel || a.kunde || a.preise)) throw 0;
+        return a;
+      });
   };
 
   (variante ? holen('angebot-' + variante + '.json').catch(function () { return holen('angebot.json'); })
@@ -99,7 +107,7 @@
         '<div class="p" id="p" role="dialog" aria-labelledby="t" hidden>' +
           '<div class="kopf"><div class="vz">' + esc(a.vorzeile || 'Dein Angebot') + '</div>' +
           '<button class="zu" type="button" aria-label="Schließen">×</button></div>' +
-          '<h2 id="t" tabindex="-1">' + esc(a.titel || ('Für ' + a.kunde)) + '</h2>' +
+          '<h2 id="t" tabindex="-1">' + esc(a.titel || (a.kunde ? 'Für ' + a.kunde : 'Dein Angebot')) + '</h2>' +
           (punkte ? '<h3>Das steckt drin</h3><ul class="lo">' + punkte + '</ul>' : '') +
           (preise ? '<h3>Preise</h3><ul>' + preise + '</ul>' : '') +
           '<p class="fuss">' + esc(a.fussnote || 'Alle Preise zzgl. gesetzlicher Umsatzsteuer, soweit sie anfällt.') + '</p>' +
