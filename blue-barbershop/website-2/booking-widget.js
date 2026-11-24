@@ -190,7 +190,7 @@
 
   /* ───────── mock backend for demos ───────── */
   // Single source of truth for opening hours: 0=So … 6=Sa, [open, close] as whole hours, or null if closed.
-  var WEEKLY_HOURS = { 0: null, 1: [8, 20], 2: [8, 20], 3: [8, 20], 4: [8, 20], 5: [8, 20], 6: [8, 17] };
+  var WEEKLY_HOURS = { 0: null, 1: [8, 20], 2: [8, 20], 3: [8, 20], 4: [8, 20], 5: [8, 20], 6: [7, 17] };
 
   function mockApi(action, params) {
     return new Promise(function (res) {
@@ -204,11 +204,14 @@
           res({
             businessName: 'Blue Barbershop',
             services: [
-              { id: 'trocken',  name: 'Trockenhaarschnitt · 18 €',            duration: 30 },
-              { id: 'bart-cut', name: 'Haare inkl. Bart · 31 €',               duration: 60 },
-              { id: 'wsf',      name: 'Waschen, Schneiden & Föhnen · 21 €',    duration: 30 },
-              { id: 'maschine', name: 'Komplett mit der Maschine · 15 €',      duration: 30 },
-              { id: 'kontur',   name: 'Bartkontur mit dem Messer · 13 €',      duration: 30 }
+              { id: 'trocken',    name: 'Trockenhaarschnitt · 23 €',                  duration: 30 },
+              { id: 'bart-cut',   name: 'Haare inkl. Bart · 41 €',                     duration: 60 },
+              { id: 'wsf',        name: 'Waschen, Schneiden & Föhnen · 27 €',          duration: 30 },
+              { id: 'maschine',   name: 'Komplett mit der Maschine · 15 €',            duration: 30 },
+              { id: 'kontur',     name: 'Bartkontur mit dem Messer · 18 €',            duration: 30 },
+              { id: 'heisswachs', name: 'Heißwachs (Ohren & Nase) · 8 €',              duration: 10 },
+              { id: 'komplett',   name: 'Komplettpaket (Haarschnitt, Bart) · 56 €',    duration: 60 },
+              { id: 'kind',       name: 'Kinderhaarschnitt bis 12 Jahre · 19 €',       duration: 30 }
             ],
             hours: hours,
             maxAdvanceDays: 60, minNoticeHours: 6
